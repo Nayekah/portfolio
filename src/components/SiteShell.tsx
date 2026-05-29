@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { navItems } from '../content/site'
 import Navbar from './Navbar'
+import SocialOverlay from './SocialOverlay'
 import SiteFooter from './SiteFooter'
 
 type SiteShellProps = {
@@ -18,6 +19,7 @@ function SiteShell({ children, isHomePage, mainClassName, year }: SiteShellProps
         <Navbar isHomePage={isHomePage} navItems={navItems} />
         <main className={mainClassName}>{children}</main>
       </div>
+      <SocialOverlay />
       <SiteFooter isHomePage={isHomePage} year={year} />
     </>
   )

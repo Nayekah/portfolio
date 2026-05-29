@@ -4,6 +4,7 @@ import type { BlogEntry } from '../types/content'
 type AppRoute =
   | { type: 'home' }
   | { type: 'contact' }
+  | { type: 'projects' }
   | { type: 'blog'; entry: BlogEntry }
 
 export function normalizePathname(pathname: string) {
@@ -23,6 +24,10 @@ export function resolveAppRoute(pathname: string): AppRoute {
 
   if (normalizedPathname === '/contacts') {
     return { type: 'contact' }
+  }
+
+  if (normalizedPathname === '/projects') {
+    return { type: 'projects' }
   }
 
   const blogEntry = getBlogEntryByPath(normalizedPathname)

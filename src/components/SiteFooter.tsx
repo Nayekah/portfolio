@@ -29,8 +29,8 @@ function SiteFooter({ isHomePage, year }: SiteFooterProps) {
 
       <div className="footer-bottom">
         <p>Nayaka Ghana Subrata &copy; {year}</p>
-        <a className="footer-back-top" href={isHomePage ? '#main-page' : '/'}>
-          {isHomePage ? 'Back to top' : 'Back home'}
+        <a className="footer-back-top" href="#main-page">
+          Back to top
         </a>
       </div>
     </footer>

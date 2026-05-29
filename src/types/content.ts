@@ -42,6 +42,30 @@ export type BlogEntry = {
   title: string
 }
 
+export type ProjectEntry = {
+  category: string
+  date: string
+  title: string
+  subtitle: string
+  description: string
+  overview: string
+  buildNotes: string
+  stack: string[]
+  href: string
+  image: string
+  imageAlt: string
+  tone: string
+}
+
+export type WritingEntry = {
+  publishedAt: string
+  dateLabel: string
+  title: string
+  summary: string
+  course: string
+  href: string
+}
+
 export type BlogBlock =
   | { type: 'paragraph'; text: string }
   | { type: 'heading'; depth: 2 | 3; id: string; text: string }

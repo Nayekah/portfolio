@@ -30,8 +30,13 @@ function Navbar({ isHomePage = true, navItems }: NavbarProps) {
 
   return (
     <header className={`site-header${isMenuOpen ? ' nav-open' : ''}`}>
-      <a className="brand" href={isHomePage ? '#main-page' : '/'} onClick={closeMenu}>
-        <span className="brand-name">K4</span>
+      <a
+        className="brand"
+        href={isHomePage ? '#main-page' : '/'}
+        onClick={closeMenu}
+        aria-label="Go to home"
+      >
+        <img className="brand-gif" src="/main-navbar.gif" alt="" aria-hidden="true" />
       </a>
 
       <button

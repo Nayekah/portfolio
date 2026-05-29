@@ -13,10 +13,12 @@ import {
 } from 'motion/react'
 import './App.css'
 import { articleCards } from './content/blogs'
+import { featuredProjects } from './content/projects'
 import BlogPage from './components/blogs/BlogPage'
 import SiteShell from './components/SiteShell'
 import { getCurrentPathname, resolveAppRoute } from './lib/routes'
 import ContactPage from './pages/ContactPage'
+import ProjectsPage from './pages/ProjectsPage'
 
 type LogoItem = {
   name: string
@@ -34,16 +36,6 @@ type Metric = {
 type ValueCard = {
   title: string
   body: string
-  tone: string
-}
-
-type ProjectCard = {
-  title: string
-  subtitle: string
-  description: string
-  href: string
-  image: string
-  imageAlt: string
   tone: string
 }
 
@@ -67,6 +59,11 @@ type MetricCellStyle = CSSProperties & {
   '--cell-opacity': number
   '--cell-delay': string
   '--cell-scale': number
+}
+
+type ValueCardProps = {
+  card: ValueCard
+  index: number
 }
 
 type RevealProps = {
@@ -189,29 +186,6 @@ const specializations = [
   ['Binary Exploitation', 'Machine Learning', 'Interaction Design', 'Deep Learning'],
 ]
 
-const projectCards: ProjectCard[] = [
-  {
-    title: 'Convo',
-    subtitle: 'Secure messaging app',
-    description:
-      'An end-to-end encrypted chat app with JWT auth, browser-side ECDH key exchange, AES-secured messaging, and real-time one-to-one conversations.',
-    href: 'https://github.com/Nayekah/Convo',
-    image: '/projects/convo.png',
-    imageAlt: 'Screenshot of the Convo end-to-end encrypted chat application.',
-    tone: 'olive',
-  },
-  {
-    title: 'Keossku Band',
-    subtitle: 'Custom operating system',
-    description:
-      'A custom OS in C and x86 Assembly with scheduling, memory management, syscalls, EXT2 support, and low-level drivers running in QEMU.',
-    href: 'https://github.com/Nayekah/Keossku-Band',
-    image: '/projects/keosskuband.jpeg',
-    imageAlt: 'Screenshot of the Keossku Band custom operating system project.',
-    tone: 'ink',
-  },
-]
-
 const heroTypingLine1 = {
   prefix: "Hello, I'm ",
   highlight: 'Nayaka',
@@ -251,6 +225,9 @@ const heroProfileLinks = [
     custom: 'cryptohack',
   },
 ]
+
+const siteTitlePrefix = 'Nayaka Ghana Subrata | Security, Systems, and Software Engineer'
+const scrambleGlyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+-?'
 
 function createPattern(seed: number, total = 324): PatternCell[] {
   return Array.from({ length: total }, (_, index) => {
@@ -384,6 +361,92 @@ function renderTypedLine(
       <span>{line.suffix.slice(0, suffixChars)}</span>
       {showCursor && <span className="typing-cursor" aria-hidden="true"></span>}
     </>
+  )
+}
+
+function getScrambleCharacter(character: string) {
+  if (character === ' ') return ' '
+  if (/[^A-Za-z0-9]/.test(character)) return character
+
+  return scrambleGlyphs[Math.floor(Math.random() * scrambleGlyphs.length)]
+}
+
+function ScrambleText({
+  active,
+  settleDelay = 24,
+  text,
+}: {
+  active: boolean
+  settleDelay?: number
+  text: string
+}) {
+  const shouldReduceMotion = useReducedMotion()
+  const [displayText, setDisplayText] = useState(text)
+
+  useEffect(() => {
+    if (shouldReduceMotion || !active) {
+      setDisplayText(text)
+      return
+    }
+
+    const characters = text.split('')
+    let activeIndex = 0
+    let scrambleSteps = 0
+    let timer = 0
+
+    const tick = () => {
+      while (activeIndex < characters.length && characters[activeIndex] === ' ') {
+        activeIndex += 1
+      }
+
+      if (activeIndex >= characters.length) {
+        setDisplayText(text)
+        return
+      }
+
+      setDisplayText(
+        characters
+          .map((character, index) => {
+            if (index < activeIndex) return character
+            if (index > activeIndex) return ' '
+
+            return getScrambleCharacter(character)
+          })
+          .join('')
+      )
+
+      scrambleSteps += 1
+
+      if (scrambleSteps >= 3) {
+        scrambleSteps = 0
+        activeIndex += 1
+      }
+
+      timer = window.setTimeout(tick, settleDelay)
+    }
+
+    tick()
+
+    return () => window.clearTimeout(timer)
+  }, [active, settleDelay, shouldReduceMotion, text])
+
+  return <>{displayText}</>
+}
+
+function ValueInterestCard({ card, index }: ValueCardProps) {
+  const [isScrambleActive, setIsScrambleActive] = useState(false)
+
+  return (
+    <motion.article
+      className={`value-card tone-${card.tone}`}
+      onViewportEnter={() => setIsScrambleActive(true)}
+      viewport={{ once: true, amount: 0.6 }}
+    >
+      <h3>
+        <ScrambleText active={isScrambleActive} settleDelay={22 + index * 4} text={card.title} />
+      </h3>
+      <p>{card.body}</p>
+    </motion.article>
   )
 }
 
@@ -759,6 +822,19 @@ function App() {
   const currentAward = awardCards[activeAward]
   const activeRoute = useMemo(() => resolveAppRoute(pathname), [pathname])
 
+  useEffect(() => {
+    const pageIdentifier =
+      activeRoute.type === 'home'
+        ? 'Home'
+        : activeRoute.type === 'projects'
+          ? 'Projects'
+          : activeRoute.type === 'contact'
+            ? 'Contacts'
+            : `Blog · ${activeRoute.entry.title}`
+
+    document.title = `${siteTitlePrefix} | ${pageIdentifier}`
+  }, [activeRoute])
+
   const previousAward = () => {
     setActiveAward((current) => (current === 0 ? awardCards.length - 1 : current - 1))
   }
@@ -799,6 +875,10 @@ function App() {
     return <ContactPage year={year} />
   }
 
+  if (activeRoute.type === 'projects') {
+    return <ProjectsPage year={year} />
+  }
+
   return (
     <SiteShell isHomePage year={year}>
         <section className="section hero-section">
@@ -814,9 +894,7 @@ function App() {
               <div className="button-row">
                 <a
                   className="button-outline button-with-icon"
-                  href="https://github.com/Nayekah"
-                  target="_blank"
-                  rel="noreferrer"
+                  href="/projects"
                 >
                   <FiGithub aria-hidden="true" />
                   <span>View projects</span>
@@ -985,12 +1063,9 @@ function App() {
           </RevealBlock>
 
           <StaggerGroup className="value-card-grid">
-            {valueCards.map((card) => (
+            {valueCards.map((card, index) => (
               <StaggerItem key={card.title}>
-                <article className={`value-card tone-${card.tone}`}>
-                  <h3>{card.title}</h3>
-                  <p>{card.body}</p>
-                </article>
+                <ValueInterestCard card={card} index={index} />
               </StaggerItem>
             ))}
           </StaggerGroup>
@@ -1022,16 +1097,14 @@ function App() {
               </p>
               <a
                 className="button-outline"
-                href="https://github.com/Nayekah"
-                target="_blank"
-                rel="noreferrer"
+                href="/projects"
               >
                 Explore the projects
               </a>
             </RevealBlock>
 
             <StaggerGroup className="featured-card-grid">
-              {projectCards.map((project) => (
+              {featuredProjects.map((project) => (
                 <StaggerItem key={project.title}>
                   <article className="project-card">
                     <a
@@ -1084,7 +1157,7 @@ function App() {
                 Essays, project pages, write-ups, and research fragments collected in one place.
               </p>
             </div>
-            <a className="button-outline" href="#write-ups">
+            <a className="button-outline" href="/projects#writings">
               View all articles
             </a>
           </RevealBlock>
@@ -1208,26 +1281,27 @@ function App() {
           <StaggerGroup className="closing-grid">
             <StaggerItem>
               <div className="closing-panel">
-                <h2>Secure your future with clarity.</h2>
+                <h2>Build with clarity.</h2>
                 <p>
-                  If you want a portfolio, a writing system, or a cleaner front-end that feels more
-                  deliberate, this is where the conversation starts.
+                  I build software too, not just portfolios. If you need a stronger digital
+                  presence, a writing archive, or a product interface that feels sharper and more
+                  deliberate, this is where the work can begin to take a clearer shape.
                 </p>
                 <a className="button-solid" href="/contacts">
-                  Let's talk
+                  Start a conversation
                 </a>
               </div>
             </StaggerItem>
 
             <StaggerItem>
               <div className="closing-panel">
-                <h2>Work with me.</h2>
+                <h2>See how I build.</h2>
                 <p>
-                  I build personal brands, editorial interfaces, and systems for turning scattered
-                  thinking into useful output.
+                  I build editorial portfolios, developer-facing interfaces, and systems that turn
+                  scattered ideas into something coherent, usable, and ready to publish.
                 </p>
-                <a className="button-outline" href="#projects">
-                  View current work
+                <a className="button-outline" href="/projects">
+                  See selected work
                 </a>
               </div>
             </StaggerItem>
