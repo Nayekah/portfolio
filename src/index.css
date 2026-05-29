@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@font-face {
+  font-family: 'Recife Text';
+  src: url('https://cdn.prod.website-files.com/64cb38eec86c605724f39d76/64ec411b25a667d3c3266672_RecifeTextWeb-Book.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Recife Text';
+  src: url('https://cdn.prod.website-files.com/64cb38eec86c605724f39d76/64ec411b031d1270f4d968b6_RecifeTextWeb-SemiBold.woff2')
+    format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Unica77';
+  src: url('https://cdn.prod.website-files.com/64cb38eec86c605724f39d76/64ec41d73e9f2319bdda34c5_Unica77LLWeb-Regular.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Unica77';
+  src: url('https://cdn.prod.website-files.com/64cb38eec86c605724f39d76/64ec41d7ec1cda0a0214507f_Unica77LLWeb-Bold.woff2')
+    format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --paper: #ffffff;
+  --ink: #28281e;
+  --muted: #9f998d;
+  --line: #ddd6ca;
+  --rule: rgba(40, 40, 30, 0.42);
+  --navy: #222d68;
+  --navy-line: rgba(255, 255, 255, 0.2);
+  --footer: #26271a;
+  --footer-line: rgba(255, 255, 255, 0.16);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  max-width: 100%;
+  overflow-x: clip;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Unica77', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.nav-open {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+textarea,
+button {
+  border-radius: 0;
+}
+
+#root {
+  min-height: 100vh;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
