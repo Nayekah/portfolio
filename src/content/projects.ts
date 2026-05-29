@@ -126,7 +126,7 @@ const sideProjects: ProjectEntry[] = [
   {
     category: 'Algorithms x NLP',
     date: '2025',
-    title: 'Tubes3_TheRecruiter',
+    title: 'TheRecruiter',
     subtitle: 'CV parsing applicant tracker',
     description:
       'A simplified applicant tracking system that parses digital CVs, extracts structured applicant data, and searches content with exact and fuzzy matching.',
