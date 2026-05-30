@@ -12,14 +12,17 @@ import {
   useSpring,
 } from 'motion/react'
 import './App.css'
+import { featuredAwards } from './content/awards'
 import { articleCards } from './content/blogs'
 import { featuredProjects } from './content/projects'
 import BlogPage from './components/blogs/BlogPage'
 import SiteShell from './components/SiteShell'
 import { getCurrentPathname, resolveAppRoute } from './lib/routes'
+import AwardsPage from './pages/AwardsPage'
 import ContactPage from './pages/ContactPage'
 import ProjectsPage from './pages/ProjectsPage'
 import MiscellaneousPage from './pages/MiscellaneousPage'
+import type { FeaturedAward } from './types/content'
 
 type LogoItem = {
   name: string
@@ -38,15 +41,6 @@ type ValueCard = {
   title: string
   body: string
   tone: string
-}
-
-type AwardCard = {
-  category: string
-  date: string
-  title: string
-  body: string
-  image: string
-  imageAlt: string
 }
 
 type PatternCell = {
@@ -123,38 +117,11 @@ const metrics: Metric[] = [
     seed: 29,
   },
   {
-    number: '120+',
-    label: 'Miscellaneous notes',
-    body: 'Connected references, reading notes, draft fragments, and problem statements that feed the public work.',
+    number: '5+',
+    label: 'Awards',
+    body: 'National and international competition results across cybersecurity and programming.',
     tone: 'green',
     seed: 47,
-  },
-]
-
-const awardCards: AwardCard[] = [
-  {
-    category: 'Cybersecurity',
-    date: 'Oct 2025',
-    title: 'Finalist - GEMASTIK XVIII Cyber Security',
-    body: 'Reached the finalist stage at GEMASTIK XVIII Cyber Security, organized by the Ministry of Higher Education, Science, and Technology.',
-    image: '/awards/gemastikxviii.webp',
-    imageAlt: 'Team photo at GEMASTIK XVIII Cyber Security finalist event.',
-  },
-  {
-    category: 'Cybersecurity',
-    date: 'Oct 2025',
-    title: '2nd Place Hology 8.0 Capture the Flag',
-    body: 'Won 2nd place in the Hology 8.0 Capture the Flag competition organized by FILKOM Universitas Brawijaya.',
-    image: '/awards/hology.webp',
-    imageAlt: 'Team photo receiving 2nd place award at Hology 8.0 Capture the Flag.',
-  },
-  {
-    category: 'Competitive Programming',
-    date: '2025',
-    title: 'Honorable Mention - ICPC Asia Jakarta Regional Contest 2025',
-    body: 'Received Honorable Mention at the ICPC Asia Jakarta Regional Contest 2025 (International Collegiate Programming Contest).',
-    image: '/awards/icpc.jpg',
-    imageAlt: 'Team photo from the ICPC Asia Jakarta Regional Contest 2025.',
   },
 ]
 
@@ -757,7 +724,7 @@ function HeroPolaroid() {
   )
 }
 
-function AwardPolaroidCard({ award }: { award: AwardCard }) {
+function AwardPolaroidCard({ award }: { award: FeaturedAward }) {
   const shouldReduceMotion = useReducedMotion()
   const rotateX = useMotionValue(0)
   const rotateY = useMotionValue(0)
@@ -820,7 +787,7 @@ function App() {
   const year = useMemo(() => new Date().getFullYear(), [])
   const metricPatterns = useMemo(() => metrics.map((metric) => createPattern(metric.seed)), [])
   const currentMetric = metrics[activeMetric]
-  const currentAward = awardCards[activeAward]
+  const currentAward = featuredAwards[activeAward]
   const activeRoute = useMemo(() => resolveAppRoute(pathname), [pathname])
 
   useEffect(() => {
@@ -831,6 +798,8 @@ function App() {
           ? 'Projects'
           : activeRoute.type === 'contact'
             ? 'Contacts'
+            : activeRoute.type === 'awards'
+              ? 'Awards'
             : activeRoute.type === 'miscellaneous'
               ? 'Miscellaneous'
               : `Blog · ${activeRoute.entry.title}`
@@ -839,11 +808,13 @@ function App() {
   }, [activeRoute])
 
   const previousAward = () => {
-    setActiveAward((current) => (current === 0 ? awardCards.length - 1 : current - 1))
+    setActiveAward((current) => (current === 0 ? featuredAwards.length - 1 : current - 1))
   }
 
   const nextAward = () => {
-    setActiveAward((current) => (current === awardCards.length - 1 ? 0 : current + 1))
+    setActiveAward((current) =>
+      current === featuredAwards.length - 1 ? 0 : current + 1
+    )
   }
 
   useEffect(() => {
@@ -859,10 +830,12 @@ function App() {
   }, [isMetricAutoplayPaused, shouldReduceMotion])
 
   useEffect(() => {
-    if (shouldReduceMotion || isAwardAutoplayPaused || awardCards.length < 2) return
+    if (shouldReduceMotion || isAwardAutoplayPaused || featuredAwards.length < 2) return
 
     const timer = window.setInterval(() => {
-      setActiveAward((current) => (current === awardCards.length - 1 ? 0 : current + 1))
+      setActiveAward((current) =>
+        current === featuredAwards.length - 1 ? 0 : current + 1
+      )
     }, 3200)
 
     return () => {
@@ -880,6 +853,10 @@ function App() {
 
   if (activeRoute.type === 'projects') {
     return <ProjectsPage year={year} />
+  }
+
+  if (activeRoute.type === 'awards') {
+    return <AwardsPage year={year} />
   }
 
   if (activeRoute.type === 'miscellaneous') {
@@ -1018,6 +995,9 @@ function App() {
                 Selected milestones from cybersecurity competitions and student technology events.
               </p>
             </div>
+            <a className="button-outline" href="/awards">
+              View all awards
+            </a>
           </RevealBlock>
 
           <RevealBlock
@@ -1044,7 +1024,7 @@ function App() {
             >
               <AwardPolaroidCard award={currentAward} />
               <div className="award-tabs" aria-label="Award navigation">
-                {awardCards.map((award, index) => (
+                {featuredAwards.map((award, index) => (
                   <button
                     type="button"
                     key={award.title}

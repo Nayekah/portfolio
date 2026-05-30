@@ -3,7 +3,7 @@
 export const navItems: NavItem[] = [
   { href: '#blogs', label: 'blogs' },
   { href: '/projects', label: 'projects' },
-  { href: '#awards', label: 'awards' },
+  { href: '/awards', label: 'awards' },
   { href: '/miscellaneous', label: 'miscellaneous' },
 ]
 
@@ -12,7 +12,7 @@ export const footerColumns: FooterColumn[] = [
     heading: 'About me',
     links: [
       { href: '/projects', label: 'Projects' },
-      { href: '#awards', label: 'Awards' },
+      { href: '/awards', label: 'Awards' },
       { href: '/contacts', label: 'Contacts' },
     ],
   },

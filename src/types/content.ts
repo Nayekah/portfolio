@@ -66,6 +66,34 @@ export type WritingEntry = {
   href: string
 }
 
+export type FeaturedAward = {
+  category: string
+  date: string
+  title: string
+  body: string
+  image: string
+  imageAlt: string
+}
+
+export type AwardTimelineEntry = {
+  scope: string
+  title: string
+  organization: string
+  year: string
+  summary: string
+  image: string
+  imageAlt: string
+  polaroidLabel: string
+}
+
+export type EducationEntry = {
+  label: string
+  institution: string
+  degree: string
+  timeframe: string
+  country: string
+}
+
 export type BlogBlock =
   | { type: 'paragraph'; text: string }
   | { type: 'heading'; depth: 2 | 3; id: string; text: string }

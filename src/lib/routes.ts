@@ -5,6 +5,7 @@ type AppRoute =
   | { type: 'home' }
   | { type: 'contact' }
   | { type: 'projects' }
+  | { type: 'awards' }
   | { type: 'miscellaneous' }
   | { type: 'blog'; entry: BlogEntry }
 
@@ -29,6 +30,10 @@ export function resolveAppRoute(pathname: string): AppRoute {
 
   if (normalizedPathname === '/projects') {
     return { type: 'projects' }
+  }
+
+  if (normalizedPathname === '/awards') {
+    return { type: 'awards' }
   }
 
   if (normalizedPathname === '/miscellaneous' || normalizedPathname === '/second-brain') {

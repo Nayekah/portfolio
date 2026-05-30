@@ -1,20 +1,33 @@
 const SPOTIFY_TOP_TRACK_URLS = [
   'https://open.spotify.com/track/4wUQvovMEkByMvZNCecZ9v',
-  'https://open.spotify.com/track/0DYvTdqBqW6erA1a7pFzVo',
+  'https://open.spotify.com/track/4twllsTUoTAFxiVeq3bNjq?si=a6011b2d911241e0',
   'https://open.spotify.com/track/5HhYHpxwdGTCO5YK7dycoT',
 ]
 
 const SPOTIFY_TOP_SONGS_UNAVAILABLE_MESSAGE = 'Spotify song details are temporarily unavailable.'
 
+function decodeHtmlEntities(value) {
+  return value
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCodePoint(Number.parseInt(hex, 16)))
+    .replace(/&#(\d+);/g, (_, decimal) => String.fromCodePoint(Number.parseInt(decimal, 10)))
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;|&#39;/g, "'")
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+}
+
 function parseTrackSummaryFromPage(html, href) {
-  const title = html.match(/<meta property="og:title" content="([^"]+)"/i)?.[1] ?? 'Unknown track'
+  const rawTitle = html.match(/<meta property="og:title" content="([^"]+)"/i)?.[1] ?? 'Unknown track'
   const image =
     html.match(/<meta property="og:image" content="([^"]+)"/i)?.[1] ?? null
-  const description =
+  const rawDescription =
     html.match(/<meta property="og:description" content="([^"]+)"/i)?.[1] ??
     html.match(/<meta name="twitter:description" content="([^"]+)"/i)?.[1] ??
     ''
 
+  const title = decodeHtmlEntities(rawTitle)
+  const description = decodeHtmlEntities(rawDescription)
   const artistFromSongPattern = description.match(/Song\s+[·-]\s+(.+?)\s+[·-]\s+\d{4}$/i)?.[1]
   const artistFromOgPattern = description.split(' · ')[0]?.trim()
   const year = description.match(/(\d{4})$/)?.[1] ?? 'Spotify track'
