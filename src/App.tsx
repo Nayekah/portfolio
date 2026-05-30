@@ -382,10 +382,10 @@ function ScrambleText({
 }) {
   const shouldReduceMotion = useReducedMotion()
   const [displayText, setDisplayText] = useState(text)
+  const resolvedText = shouldReduceMotion || !active ? text : displayText
 
   useEffect(() => {
     if (shouldReduceMotion || !active) {
-      setDisplayText(text)
       return
     }
 
@@ -430,7 +430,7 @@ function ScrambleText({
     return () => window.clearTimeout(timer)
   }, [active, settleDelay, shouldReduceMotion, text])
 
-  return <>{displayText}</>
+  return <>{resolvedText}</>
 }
 
 function ValueInterestCard({ card, index }: ValueCardProps) {

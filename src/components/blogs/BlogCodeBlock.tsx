@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FiCheck, FiChevronDown, FiChevronRight, FiCopy } from 'react-icons/fi'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash'
 import c from 'react-syntax-highlighter/dist/esm/languages/prism/c'
 import cpp from 'react-syntax-highlighter/dist/esm/languages/prism/cpp'
@@ -10,6 +10,7 @@ import json from 'react-syntax-highlighter/dist/esm/languages/prism/json'
 import markdown from 'react-syntax-highlighter/dist/esm/languages/prism/markdown'
 import python from 'react-syntax-highlighter/dist/esm/languages/prism/python'
 import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript'
+import { useTheme } from '../theme'
 
 SyntaxHighlighter.registerLanguage('bash', bash)
 SyntaxHighlighter.registerLanguage('sh', bash)
@@ -41,6 +42,7 @@ function normalizeLanguage(language: string) {
 function BlogCodeBlock({ code, language }: BlogCodeBlockProps) {
   const [isCopied, setIsCopied] = useState(false)
   const [isExpanded, setIsExpanded] = useState(true)
+  const { theme } = useTheme()
   const resolvedLanguage = normalizeLanguage(language)
 
   const handleCopy = async () => {
@@ -90,7 +92,7 @@ function BlogCodeBlock({ code, language }: BlogCodeBlockProps) {
       {isExpanded ? (
         <SyntaxHighlighter
           language={resolvedLanguage}
-          style={oneLight}
+          style={theme === 'dark' ? oneDark : oneLight}
           showLineNumbers
           wrapLines
           wrapLongLines
@@ -120,7 +122,7 @@ function BlogCodeBlock({ code, language }: BlogCodeBlockProps) {
           lineNumberStyle={{
             minWidth: '2.4rem',
             paddingRight: '1rem',
-            color: 'rgba(40, 40, 30, 0.32)',
+            color: theme === 'dark' ? 'rgba(232, 227, 215, 0.32)' : 'rgba(40, 40, 30, 0.32)',
           }}
         >
           {code}
