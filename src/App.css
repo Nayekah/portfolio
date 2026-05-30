@@ -1,4 +1,4 @@
-.page {
+﻿.page {
   width: min(100%, 1950px);
   margin: 0 auto;
   padding-inline: clamp(0.85rem, 1.8vw, 2rem);
@@ -120,9 +120,9 @@
 
 .theme-overlay-toggle[aria-pressed='false']:hover,
 .theme-overlay-toggle[aria-pressed='false']:focus-visible {
-  background: #1f2732;
-  border-color: #1f2732;
-  color: #f4efe3;
+  background: #171311;
+  border-color: #171311;
+  color: #f3ecd9;
 }
 
 .theme-overlay-toggle[aria-pressed='true']:hover,
@@ -1275,6 +1275,11 @@ p {
   margin-top: 3.5rem;
 }
 
+.specializations-link {
+  justify-self: start;
+  margin-top: 1.35rem;
+}
+
 .small-section-title {
   font-family: 'Unica77';
   font-size: 1.1rem;
@@ -2175,6 +2180,469 @@ p {
   transform: translateX(-1px);
 }
 
+.miscellaneous-page-main {
+  padding-bottom: 2.5rem;
+}
+
+.miscellaneous-page-section {
+  padding-bottom: 0;
+}
+
+.miscellaneous-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.9fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+  margin-top: clamp(4rem, 8vw, 6.5rem);
+  padding: 2.3rem 0 1.6rem;
+  border-top: 1px solid var(--rule);
+}
+
+.miscellaneous-page-title {
+  max-width: 9ch;
+  margin-top: 0.2rem;
+  font-size: clamp(2.15rem, 2.9vw, 3.2rem);
+  line-height: 1.02;
+}
+
+.miscellaneous-hero-media {
+  display: grid;
+  gap: 1.35rem;
+  align-content: start;
+}
+
+.miscellaneous-hero-gif {
+  width: min(100%, 18rem);
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  background: var(--surface-panel);
+  box-shadow:
+    0 2px 0 var(--shadow-soft),
+    0 14px 28px var(--shadow-panel);
+}
+
+.miscellaneous-hero-gif img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.miscellaneous-intro {
+  display: grid;
+  gap: 1rem;
+  padding-top: clamp(0.8rem, 3vw, 2rem);
+  border-top: 1px solid var(--line);
+}
+
+.miscellaneous-intro p {
+  max-width: 42rem;
+  font-size: clamp(1rem, 1.14vw, 1.08rem);
+  line-height: 1.58;
+}
+
+.miscellaneous-link-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-bottom: 1.5rem;
+}
+
+.miscellaneous-chip-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.7rem;
+  padding: 0.58rem 0.92rem;
+  border: 1px solid var(--line);
+  background: var(--surface-panel);
+  color: var(--ink);
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.miscellaneous-chip-link svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  transition: transform 220ms ease;
+}
+
+.miscellaneous-chip-link:hover,
+.miscellaneous-chip-link:focus-visible {
+  border-color: var(--ink);
+  background: var(--surface-panel-soft);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px var(--shadow-panel);
+}
+
+.miscellaneous-chip-link:hover svg,
+.miscellaneous-chip-link:focus-visible svg {
+  transform: translate(1px, -1px);
+}
+
+.miscellaneous-deck,
+.miscellaneous-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.miscellaneous-deck {
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.72fr);
+  align-items: stretch;
+  margin-top: clamp(2.6rem, 5vw, 4.25rem);
+}
+
+.miscellaneous-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1rem;
+}
+
+.miscellaneous-spotify-card,
+.miscellaneous-note-card,
+.miscellaneous-panel {
+  height: 100%;
+  padding: 1.2rem;
+  border: 1px solid var(--border-soft);
+  background: var(--surface-panel);
+  box-shadow:
+    0 2px 0 var(--shadow-soft),
+    0 18px 30px var(--shadow-panel);
+}
+
+.miscellaneous-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.1rem;
+}
+
+.miscellaneous-card-head h2,
+.miscellaneous-note-card h2,
+.miscellaneous-panel h2 {
+  font-size: clamp(1.55rem, 2vw, 2.1rem);
+  line-height: 1.04;
+}
+
+.miscellaneous-card-kicker {
+  display: inline-block;
+  color: var(--muted);
+  font-size: 0.92rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.miscellaneous-spotify-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: #1db954;
+}
+
+.miscellaneous-spotify-mark svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.miscellaneous-spotify-layout {
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: end;
+  min-height: 12.25rem;
+}
+
+.miscellaneous-spotify-art,
+.miscellaneous-spotify-art img,
+.miscellaneous-spotify-art-fallback {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.miscellaneous-spotify-art {
+  overflow: hidden;
+  border: 1px solid var(--border-faint);
+  background: var(--surface-panel-soft);
+}
+
+.miscellaneous-spotify-art img {
+  display: block;
+  object-fit: cover;
+}
+
+.miscellaneous-spotify-art-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #1db954;
+}
+
+.miscellaneous-spotify-art-fallback svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.miscellaneous-spotify-copy {
+  display: grid;
+  align-content: end;
+  gap: 0.45rem;
+}
+
+.miscellaneous-spotify-status {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.miscellaneous-spotify-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  justify-self: start;
+  font-family: 'Unica77';
+  font-size: clamp(1.55rem, 2vw, 2rem);
+  line-height: 1.1;
+  transition: color 220ms ease, transform 220ms ease;
+}
+
+.miscellaneous-spotify-title svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 220ms ease;
+}
+
+.miscellaneous-spotify-title:hover,
+.miscellaneous-spotify-title:focus-visible {
+  color: var(--muted);
+  transform: translateY(-1px);
+}
+
+.miscellaneous-spotify-title:hover svg,
+.miscellaneous-spotify-title:focus-visible svg {
+  transform: translate(1px, -1px);
+}
+
+.miscellaneous-spotify-meta {
+  color: var(--ink-soft);
+  font-size: clamp(0.98rem, 1.1vw, 1.06rem);
+  line-height: 1.55;
+}
+
+.miscellaneous-spotify-empty {
+  display: grid;
+  place-items: center;
+  gap: 0.75rem;
+  min-height: 12.25rem;
+  padding: 1rem;
+  border: 1px dashed var(--line);
+  text-align: center;
+}
+
+.miscellaneous-spotify-empty-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.miscellaneous-note-card {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.miscellaneous-panel-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.miscellaneous-panel-head svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--muted);
+}
+
+.miscellaneous-song-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.miscellaneous-song-item {
+  display: grid;
+  grid-template-columns: auto 3.65rem minmax(0, 1fr) auto;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--border-soft);
+  transition:
+    color 220ms ease,
+    transform 220ms ease,
+    opacity 220ms ease;
+}
+
+.miscellaneous-song-item:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.miscellaneous-song-item:hover,
+.miscellaneous-song-item:focus-visible {
+  transform: translateY(-1px);
+}
+
+.miscellaneous-song-rank {
+  color: var(--muted);
+  font-family: 'Recife Text';
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.miscellaneous-song-art,
+.miscellaneous-song-art img,
+.miscellaneous-song-art-fallback {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.miscellaneous-song-art {
+  overflow: hidden;
+  border: 1px solid var(--border-faint);
+  background: var(--surface-panel-soft);
+}
+
+.miscellaneous-song-art img {
+  display: block;
+  object-fit: cover;
+}
+
+.miscellaneous-song-art-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #1db954;
+}
+
+.miscellaneous-song-copy {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.miscellaneous-song-title,
+.miscellaneous-song-meta,
+.miscellaneous-song-album {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.miscellaneous-song-title {
+  color: var(--ink);
+  font-family: 'Unica77';
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.miscellaneous-song-meta,
+.miscellaneous-song-album {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.miscellaneous-song-item > svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  color: var(--muted);
+  transition: transform 220ms ease, color 220ms ease;
+}
+
+.miscellaneous-song-item:hover > svg,
+.miscellaneous-song-item:focus-visible > svg {
+  color: var(--ink);
+  transform: translate(1px, -1px);
+}
+
+.miscellaneous-song-empty {
+  padding: 0.25rem 0 0;
+}
+
+.miscellaneous-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.miscellaneous-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.1rem;
+  padding: 0.38rem 0.7rem;
+  border: 1px solid var(--line);
+  background: var(--surface-chip);
+  font-size: 0.9rem;
+}
+
+.miscellaneous-list {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.miscellaneous-list li {
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.miscellaneous-archive-links {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.miscellaneous-inline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  justify-self: start;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  transition:
+    color 220ms ease,
+    transform 220ms ease,
+    text-underline-offset 220ms ease;
+}
+
+.miscellaneous-inline-link svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 220ms ease;
+}
+
+.miscellaneous-inline-link:hover,
+.miscellaneous-inline-link:focus-visible {
+  color: var(--muted);
+  transform: translateY(-1px);
+  text-underline-offset: 0.28em;
+}
+
+.miscellaneous-inline-link:hover svg,
+.miscellaneous-inline-link:focus-visible svg {
+  transform: translate(2px, -2px);
+}
+
 .writing-page-main {
   padding-bottom: 2.5rem;
 }
@@ -2619,11 +3087,17 @@ p {
   }
 
   .projects-page-hero,
+  .miscellaneous-hero,
   .writing-page-hero,
   .projects-ledger,
+  .miscellaneous-deck,
   .project-case-body,
   .project-case-footer {
     grid-template-columns: 1fr;
+  }
+
+  .miscellaneous-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .project-case-actions {
@@ -2761,6 +3235,7 @@ p {
   .article-grid,
   .value-card-grid,
   .specializations-grid,
+  .miscellaneous-grid,
   .featured-card-grid,
   .footer-grid {
     grid-template-columns: 1fr;
@@ -2806,6 +3281,15 @@ p {
     align-items: stretch;
   }
 
+  .miscellaneous-spotify-layout {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .miscellaneous-spotify-art {
+    width: min(100%, 6.5rem);
+  }
+
   .writing-table-head {
     display: none;
   }
@@ -2824,5 +3308,6 @@ p {
     padding-top: 0.25rem;
   }
 }
+
 
 

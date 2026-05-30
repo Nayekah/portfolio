@@ -1,10 +1,11 @@
-import { getBlogEntryByPath } from '../content/blogs'
+﻿import { getBlogEntryByPath } from '../content/blogs'
 import type { BlogEntry } from '../types/content'
 
 type AppRoute =
   | { type: 'home' }
   | { type: 'contact' }
   | { type: 'projects' }
+  | { type: 'miscellaneous' }
   | { type: 'blog'; entry: BlogEntry }
 
 export function normalizePathname(pathname: string) {
@@ -30,6 +31,10 @@ export function resolveAppRoute(pathname: string): AppRoute {
     return { type: 'projects' }
   }
 
+  if (normalizedPathname === '/miscellaneous' || normalizedPathname === '/second-brain') {
+    return { type: 'miscellaneous' }
+  }
+
   const blogEntry = getBlogEntryByPath(normalizedPathname)
 
   if (blogEntry) {
@@ -38,3 +43,4 @@ export function resolveAppRoute(pathname: string): AppRoute {
 
   return { type: 'home' }
 }
+

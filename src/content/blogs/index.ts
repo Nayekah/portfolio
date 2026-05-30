@@ -1,4 +1,4 @@
-import type { ArticleCard, BlogEntry } from '../../types/content'
+﻿import type { ArticleCard, BlogEntry } from '../../types/content'
 import { kfuncyBlog } from './kfuncy'
 import { tetBlog } from './tet'
 
@@ -35,7 +35,7 @@ export const articleCards: ArticleCard[] = [
     category: '#Systems',
     meta: 'Lime',
     date: 'February 17, 2026',
-    title: 'Inside the second-brain: notes, tags, and useful friction',
+    title: 'Inside miscellaneous: notes, tags, and useful friction',
     body: 'Designing a note system that supports writing and product work without becoming overhead.',
     tone: 'paper',
   },
@@ -53,3 +53,4 @@ export function getBlogEntryByPath(pathname: string) {
   const normalizedPath = pathname.replace(/\/+$/, '') || '/'
   return blogEntries.find((entry) => normalizedPath === `/blogs/${entry.slug}`)
 }
+

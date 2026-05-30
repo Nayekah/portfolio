@@ -1,10 +1,10 @@
-import type { FooterColumn, NavItem } from '../types/content'
+﻿import type { FooterColumn, NavItem } from '../types/content'
 
 export const navItems: NavItem[] = [
   { href: '#blogs', label: 'blogs' },
   { href: '/projects', label: 'projects' },
   { href: '#awards', label: 'awards' },
-  { href: '#second-brain', label: 'second-brain' },
+  { href: '/miscellaneous', label: 'miscellaneous' },
 ]
 
 export const footerColumns: FooterColumn[] = [
@@ -20,7 +20,7 @@ export const footerColumns: FooterColumn[] = [
     heading: 'What I do',
     links: [
       { href: '#blogs', label: 'Blogs' },
-      { href: '#second-brain', label: 'Second-brain' },
+      { href: '/miscellaneous', label: 'Miscellaneous' },
     ],
   },
   {
@@ -36,3 +36,4 @@ export const footerColumns: FooterColumn[] = [
     ],
   },
 ]
+

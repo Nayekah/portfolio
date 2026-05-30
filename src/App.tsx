@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+﻿import { useEffect, useMemo, useRef, useState } from 'react'
 import type { CSSProperties, FocusEventHandler, MouseEventHandler, ReactNode } from 'react'
 import { FiArrowUpRight, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
 import { BsInstagram, BsTwitterX } from 'react-icons/bs'
@@ -19,6 +19,7 @@ import SiteShell from './components/SiteShell'
 import { getCurrentPathname, resolveAppRoute } from './lib/routes'
 import ContactPage from './pages/ContactPage'
 import ProjectsPage from './pages/ProjectsPage'
+import MiscellaneousPage from './pages/MiscellaneousPage'
 
 type LogoItem = {
   name: string
@@ -123,7 +124,7 @@ const metrics: Metric[] = [
   },
   {
     number: '120+',
-    label: 'Second-brain notes',
+    label: 'Miscellaneous notes',
     body: 'Connected references, reading notes, draft fragments, and problem statements that feed the public work.',
     tone: 'green',
     seed: 47,
@@ -830,7 +831,9 @@ function App() {
           ? 'Projects'
           : activeRoute.type === 'contact'
             ? 'Contacts'
-            : `Blog · ${activeRoute.entry.title}`
+            : activeRoute.type === 'miscellaneous'
+              ? 'Miscellaneous'
+              : `Blog · ${activeRoute.entry.title}`
 
     document.title = `${siteTitlePrefix} | ${pageIdentifier}`
   }, [activeRoute])
@@ -877,6 +880,10 @@ function App() {
 
   if (activeRoute.type === 'projects') {
     return <ProjectsPage year={year} />
+  }
+
+  if (activeRoute.type === 'miscellaneous') {
+    return <MiscellaneousPage year={year} />
   }
 
   return (
@@ -1070,7 +1077,7 @@ function App() {
             ))}
           </StaggerGroup>
 
-          <RevealBlock className="specializations-block" id="second-brain">
+          <RevealBlock className="specializations-block" id="miscellaneous">
             <h2 className="small-section-title">Related areas I keep exploring</h2>
             <StaggerGroup className="specializations-grid" amount={0.18} stagger={0.08}>
               {specializations.map((column, columnIndex) => (
@@ -1083,6 +1090,9 @@ function App() {
                 </StaggerItem>
               ))}
             </StaggerGroup>
+            <a className="button-outline specializations-link" href="/miscellaneous">
+              Open miscellaneous
+            </a>
           </RevealBlock>
         </section>
 
@@ -1312,5 +1322,7 @@ function App() {
 }
 
 export default App
+
+
 
 
