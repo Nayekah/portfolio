@@ -127,9 +127,10 @@
 
 .theme-overlay-toggle[aria-pressed='true']:hover,
 .theme-overlay-toggle[aria-pressed='true']:focus-visible {
-  background: #efd9aa;
-  border-color: #efd9aa;
-  color: #6b4d1f;
+  background: #f5ead1;
+  border-color: #dbb97a;
+  color: #9f5f00;
+  box-shadow: 0 14px 28px rgba(191, 138, 43, 0.18);
 }
 
 .theme-overlay-toggle:hover .theme-toggle-icon-sun,
@@ -145,6 +146,12 @@
 .theme-overlay-toggle[aria-pressed='true']:hover .theme-toggle-icon-moon,
 .theme-overlay-toggle[aria-pressed='true']:focus-visible .theme-toggle-icon-moon {
   transform: rotate(132deg) scale(0.58);
+}
+
+.theme-overlay-toggle[aria-pressed='true']:hover .theme-toggle-icon-sun,
+.theme-overlay-toggle[aria-pressed='true']:focus-visible .theme-toggle-icon-sun {
+  color: #c97900;
+  transform: rotate(-10deg) scale(1.1);
 }
 
 .theme-overlay-toggle[aria-pressed='false']:hover .theme-toggle-icon-sun,
