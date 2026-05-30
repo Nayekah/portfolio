@@ -2028,6 +2028,14 @@ p {
   line-height: 1.5;
 }
 
+.blog-summary-divider {
+  width: min(100%, var(--blog-measure));
+  max-width: var(--blog-measure);
+  height: 1px;
+  margin: 2.15rem 0 0.55rem;
+  background: var(--line);
+}
+
 .blog-content {
   display: grid;
   gap: 1.45rem;
@@ -2102,6 +2110,51 @@ p {
   display: inline-block;
   margin-inline: 0.08rem;
   vertical-align: -0.08em;
+}
+
+.blog-inline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  padding: 0.22rem 0.58rem 0.22rem 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.65rem;
+  background: #171717;
+  color: #f5f1e6;
+  font-family: 'Unica77';
+  font-size: 0.84rem;
+  line-height: 1;
+  text-decoration: none;
+  vertical-align: middle;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.blog-inline-badge:hover,
+.blog-inline-badge:focus-visible {
+  background: #222;
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #f5f1e6;
+  transform: translateY(-1px);
+}
+
+.blog-inline-badge-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+}
+
+.blog-inline-badge-icon svg {
+  width: 0.88rem;
+  height: 0.88rem;
+}
+
+.blog-inline-badge-label {
+  color: #f5f1e6;
 }
 
 .blog-quote {

@@ -17,7 +17,7 @@ export const kfuncyBlog: BlogEntry = {
   cardBody:
     'A Linux kernel challenge where one unchecked function-pointer index is enough to turn a read primitive into commit_creds(init_cred) and gain root.',
   cardTitle: 'Gaining Root Access With Just a Single Function Pointer in Linux Kernel Module',
-  date: 'May 27, 2026',
+  date: 'February 16, 2026',
   markdown,
   meta: 'C2C CTF 2026',
   summary:

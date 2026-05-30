@@ -1,5 +1,6 @@
 import katex from 'katex'
 import type { ReactNode } from 'react'
+import { FiGithub } from 'react-icons/fi'
 import type { BlogBlock, TocItem } from '../types/content'
 
 function slugify(value: string) {
@@ -18,7 +19,8 @@ function stripMarkdown(value: string) {
 
 export function renderInlineMarkdown(text: string) {
   const nodes: ReactNode[] = []
-  const pattern = /(\$\$[^$]+\$\$|\$[^$\n]+\$|\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g
+  const pattern =
+    /(\{\{github-badge:[^|}]+\|[^}]+\}\}|\[!\[[^\]]*\]\([^)]+\)\]\([^)]+\)|!\[[^\]]*\]\([^)]+\)|\$\$[^$]+\$\$|\$[^$\n]+\$|\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g
   let lastIndex = 0
 
   for (const match of text.matchAll(pattern)) {
@@ -29,7 +31,52 @@ export function renderInlineMarkdown(text: string) {
       nodes.push(text.slice(lastIndex, index))
     }
 
-    if (token.startsWith('$$') && token.endsWith('$$')) {
+    if (token.startsWith('{{github-badge:')) {
+      const badgeMatch = token.match(/^\{\{github-badge:([^|}]+)\|([^}]+)\}\}$/)
+      if (badgeMatch) {
+        nodes.push(
+          <a
+            className="blog-inline-badge"
+            href={badgeMatch[2]}
+            key={`${index}-github-badge`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className="blog-inline-badge-icon" aria-hidden="true">
+              <FiGithub />
+            </span>
+            <span className="blog-inline-badge-label">{badgeMatch[1]}</span>
+          </a>,
+        )
+      }
+    } else if (token.startsWith('[![')) {
+      const linkedImageMatch = token.match(/^\[!\[([^\]]*)\]\(([^)]+)\)\]\(([^)]+)\)$/)
+      if (linkedImageMatch) {
+        nodes.push(
+          <a
+            className="blog-inline-image-link"
+            href={linkedImageMatch[3]}
+            key={`${index}-linked-image`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img className="blog-inline-image" src={linkedImageMatch[2]} alt={linkedImageMatch[1]} />
+          </a>,
+        )
+      }
+    } else if (token.startsWith('![')) {
+      const imageMatch = token.match(/^!\[([^\]]*)\]\(([^)]+)\)$/)
+      if (imageMatch) {
+        nodes.push(
+          <img
+            className="blog-inline-image"
+            src={imageMatch[2]}
+            alt={imageMatch[1]}
+            key={`${index}-image`}
+          />,
+        )
+      }
+    } else if (token.startsWith('$$') && token.endsWith('$$')) {
       const expression = token.slice(2, -2).trim()
       const html = katex.renderToString(expression, {
         displayMode: false,

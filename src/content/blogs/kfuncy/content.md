@@ -1,6 +1,6 @@
 ### Challenge Context
 
-This write-up covers `kfuncy`, a kernel exploitation challenge from **C2C CTF 2026**, authored by **zafirr**. In the Indonesian binary-exploitation scene, zafirr is widely known as a very strong player, and that level of experience is reflected in the challenge design.
+This article covers `kfuncy`, a kernel exploitation challenge from **C2C CTF 2026**, authored by **zafirr**. In the Indonesian binary-exploitation scene, zafirr is widely known as a very strong player, and that level of experience is reflected in the challenge design.
 
 I found `kfuncy` interesting because it combines a relatively small attack surface with a direct exploitation path. The module looks simple at first glance, but the route from primitive to full privilege escalation is still instructive to analyze carefully.
 
@@ -933,4 +933,4 @@ Compile `exploit.c` first, then run it in the target environment.
 <figure><img src="assets/fig5.png" alt=""><figcaption></figcaption></figure>
 
 
-and.. yeah, we got it!
+And.. yeah, we got it!

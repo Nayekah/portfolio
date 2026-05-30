@@ -1,3 +1,7 @@
+This article covers `tet` from **C2C CTF 2026**, a cryptography challenge by **azuketto** (my goat) that indeed are the harder version of {{github-badge:vibes|https://github.com/ctf-gemastik/penyisihan-2025-public/tree/main/cry/vibes}} from the GEMASTIK 2025 qualifiers for second division. I spent a couple of hours on it before the main idea became clear, but once that part clicked, the rest of the solve followed in a much more direct way.
+
+What follows is the path I used to break the challenge down, starting from the given script and moving through the recovery of the hidden values one layer at a time.
+
 ### Initial Analysis
 
 In this challenge, we are given some big RSA scheme, and the source code given in  `tet_tet-dist.zip`. Here are the screenshots of the content:
@@ -591,8 +595,8 @@ if __name__ == "__main__":
     main()
 ```
 
-Run the code, and we'll get the flag:
+Run the code, and we'll solve the problem:
 
 <figure><img src="assets/fig3.png" alt=""><figcaption></figcaption></figure>
 
----
+Ok, that's all i guess?

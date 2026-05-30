@@ -135,6 +135,7 @@ function BlogPage({ entry, year }: BlogPageProps) {
             <div className="blog-title-divider" aria-hidden="true"></div>
             <h1 className="blog-page-title">{entry.title}</h1>
             {entry.summary ? <p className="blog-page-summary">{entry.summary}</p> : null}
+            {!entry.summary ? <div className="blog-summary-divider" aria-hidden="true"></div> : null}
 
             <div className="blog-content">
               {blocks.map((block, blockIndex) => {
