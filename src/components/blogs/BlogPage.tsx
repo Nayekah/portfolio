@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import 'katex/dist/katex.min.css'
+import { getAdjacentBlogEntries } from '../../content/blogs'
 import { parseBlogMarkdown, renderInlineMarkdown } from '../../lib/blogs'
 import type { BlogEntry } from '../../types/content'
 import BlogCodeBlock from './BlogCodeBlock'
@@ -13,6 +14,7 @@ type BlogPageProps = {
 
 function BlogPage({ entry, year }: BlogPageProps) {
   const { blocks, toc } = useMemo(() => parseBlogMarkdown(entry.markdown), [entry.markdown])
+  const { nextEntry, previousEntry } = useMemo(() => getAdjacentBlogEntries(entry), [entry])
   const [activeTocId, setActiveTocId] = useState<string | null>(toc[0]?.id ?? null)
   const pendingTocIdRef = useRef<string | null>(null)
 
@@ -205,6 +207,29 @@ function BlogPage({ entry, year }: BlogPageProps) {
 
                 return <hr className="blog-rule" key={`rule-${blockIndex}`} />
               })}
+            </div>
+
+            {previousEntry || nextEntry ? (
+              <nav className="blog-post-nav" aria-label="Post navigation">
+                {previousEntry ? (
+                  <a className="blog-post-nav-card is-previous" href={`/blogs/${previousEntry.slug}`}>
+                    <span className="blog-post-nav-label">Newer Post</span>
+                    <strong>{previousEntry.title}</strong>
+                  </a>
+                ) : null}
+
+                {nextEntry ? (
+                  <a className="blog-post-nav-card is-next" href={`/blogs/${nextEntry.slug}`}>
+                    <span className="blog-post-nav-label">Older Post</span>
+                    <strong>{nextEntry.title}</strong>
+                  </a>
+                ) : null}
+              </nav>
+            ) : null}
+
+            <div className="page-back-links">
+              <a href="/">Back to home</a>
+              <a href="/blogs">Back to blogs</a>
             </div>
           </article>
         </div>

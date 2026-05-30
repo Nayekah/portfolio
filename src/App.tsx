@@ -873,6 +873,10 @@ function App() {
   return (
     <SiteShell isHomePage year={year}>
         <section className="section hero-section">
+          <div className="blog-breadcrumbs">
+            <span>Main</span>
+          </div>
+
           <div className="hero-simple">
             <RevealBlock className="hero-copy hero-copy-simple" amount={0.5}>
               <TypingHeroTitle />

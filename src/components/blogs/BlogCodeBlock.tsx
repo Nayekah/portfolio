@@ -32,6 +32,59 @@ type BlogCodeBlockProps = {
   language: string
 }
 
+function findWrapPoint(text: string, limit: number) {
+  for (let index = limit; index > 0; index -= 1) {
+    const character = text[index]
+
+    if (character === ',') {
+      return index + 1
+    }
+
+    if (character === ' ') {
+      return index
+    }
+  }
+
+  return limit
+}
+
+function wrapCodeLine(line: string, maxColumns: number) {
+  if (line.length <= maxColumns) {
+    return line
+  }
+
+  const baseIndent = line.match(/^\s*/)?.[0] ?? ''
+  const continuationIndent = `${baseIndent}    `
+  const wrappedLines: string[] = []
+  let remaining = line.slice(baseIndent.length)
+  let currentLimit = Math.max(12, maxColumns - baseIndent.length)
+
+  while (remaining.length > currentLimit) {
+    const wrapPoint = findWrapPoint(remaining, currentLimit)
+    const segment = remaining.slice(0, wrapPoint).trimEnd()
+
+    wrappedLines.push(
+      `${wrappedLines.length === 0 ? baseIndent : continuationIndent}${segment}`
+    )
+
+    remaining = remaining.slice(wrapPoint).trimStart()
+    currentLimit = Math.max(12, maxColumns - continuationIndent.length)
+  }
+
+  wrappedLines.push(
+    `${wrappedLines.length === 0 ? baseIndent : continuationIndent}${remaining}`
+  )
+
+  return wrappedLines.join('\n')
+}
+
+function wrapCodeForDisplay(code: string, maxColumns = 88) {
+  return code
+    .split('\n')
+    .map((line) => wrapCodeLine(line, maxColumns))
+    .join('\n')
+}
+
 function normalizeLanguage(language: string) {
   const normalized = language.trim().toLowerCase()
   if (!normalized) return 'text'
@@ -44,6 +97,7 @@ function BlogCodeBlock({ code, language }: BlogCodeBlockProps) {
   const [isExpanded, setIsExpanded] = useState(true)
   const { theme } = useTheme()
   const resolvedLanguage = normalizeLanguage(language)
+  const displayCode = wrapCodeForDisplay(code)
 
   const handleCopy = async () => {
     try {
@@ -94,29 +148,22 @@ function BlogCodeBlock({ code, language }: BlogCodeBlockProps) {
           language={resolvedLanguage}
           style={theme === 'dark' ? oneDark : oneLight}
           showLineNumbers
-          wrapLines
-          wrapLongLines
           customStyle={{
             margin: 0,
             padding: '0 1.1rem 1.15rem',
             background: 'transparent',
             fontSize: '0.92rem',
             lineHeight: '1.65',
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word',
-            overflowWrap: 'anywhere',
+            whiteSpace: 'pre',
+            wordBreak: 'normal',
+            overflowWrap: 'normal',
           }}
           codeTagProps={{
             style: {
               fontFamily: "'JetBrains Mono', 'SFMono-Regular', Consolas, monospace",
               whiteSpace: 'inherit',
-            },
-          }}
-          lineProps={{
-            style: {
-              whiteSpace: 'pre-wrap',
-              wordBreak: 'break-word',
-              overflowWrap: 'anywhere',
+              wordBreak: 'normal',
+              overflowWrap: 'normal',
             },
           }}
           lineNumberStyle={{
@@ -125,7 +172,7 @@ function BlogCodeBlock({ code, language }: BlogCodeBlockProps) {
             color: theme === 'dark' ? 'rgba(232, 227, 215, 0.32)' : 'rgba(40, 40, 30, 0.32)',
           }}
         >
-          {code}
+          {displayCode}
         </SyntaxHighlighter>
       ) : null}
     </div>

@@ -503,6 +503,10 @@ function BlogsPage({ year }: BlogsPageProps) {
             </button>
           </RevealBlock>
         ) : null}
+
+        <RevealBlock className="page-back-home" amount={0.35}>
+          <a href="/">Back to home</a>
+        </RevealBlock>
       </section>
     </SiteShell>
   )

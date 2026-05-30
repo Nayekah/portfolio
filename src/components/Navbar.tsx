@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { getCurrentPathname, resolveAppRoute } from '../lib/routes'
 
 type NavItem = {
   href: string
@@ -12,10 +13,32 @@ type NavbarProps = {
 
 function Navbar({ isHomePage = true, navItems }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = getCurrentPathname()
+  const activeRoute = resolveAppRoute(pathname)
 
   const resolveHref = (href: string) => {
     if (href.startsWith('#') && !isHomePage) return `/${href}`
     return href
+  }
+
+  const isNavItemActive = (href: string) => {
+    if (href === '/blogs') {
+      return activeRoute.type === 'blogs' || activeRoute.type === 'blog'
+    }
+
+    if (href === '/projects') {
+      return activeRoute.type === 'projects'
+    }
+
+    if (href === '/awards') {
+      return activeRoute.type === 'awards'
+    }
+
+    if (href === '/miscellaneous') {
+      return activeRoute.type === 'miscellaneous'
+    }
+
+    return false
   }
 
   useEffect(() => {
@@ -51,7 +74,13 @@ function Navbar({ isHomePage = true, navItems }: NavbarProps) {
 
       <nav className="site-nav" id="site-nav" aria-label="Primary">
         {navItems.map((item) => (
-          <a key={item.href} href={resolveHref(item.href)} onClick={closeMenu}>
+          <a
+            key={item.href}
+            className={isNavItemActive(item.href) ? 'is-active' : undefined}
+            href={resolveHref(item.href)}
+            onClick={closeMenu}
+            aria-current={isNavItemActive(item.href) ? 'page' : undefined}
+          >
             {item.label}
           </a>
         ))}

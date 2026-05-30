@@ -58,3 +58,33 @@ export function getBlogEntryByPath(pathname: string) {
   return blogEntries.find((entry) => normalizedPath === `/blogs/${entry.slug}`)
 }
 
+function getBlogEntryTimestamp(entry: BlogEntry) {
+  const articleCard = articleCards.find((article) => article.linkHref === `/blogs/${entry.slug}`)
+  const source = articleCard?.publishedAt ?? entry.date
+  const parsed = Date.parse(source)
+  return Number.isNaN(parsed) ? 0 : parsed
+}
+
+export function getOrderedBlogEntries() {
+  return [...blogEntries].sort(
+    (left, right) => getBlogEntryTimestamp(right) - getBlogEntryTimestamp(left)
+  )
+}
+
+export function getAdjacentBlogEntries(entry: BlogEntry) {
+  const orderedEntries = getOrderedBlogEntries()
+  const currentIndex = orderedEntries.findIndex((candidate) => candidate.slug === entry.slug)
+
+  if (currentIndex === -1) {
+    return {
+      previousEntry: null,
+      nextEntry: null,
+    }
+  }
+
+  return {
+    previousEntry: orderedEntries[currentIndex - 1] ?? null,
+    nextEntry: orderedEntries[currentIndex + 1] ?? null,
+  }
+}
+
