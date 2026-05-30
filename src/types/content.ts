@@ -15,7 +15,7 @@ export type FooterColumn = {
 }
 
 export type ArticleCard = {
-  category: string
+  tags: string[]
   coverAlt?: string
   coverImage?: string
   href?: string
@@ -33,7 +33,7 @@ export type ArticleCard = {
 export type BlogEntry = {
   assets?: Record<string, string>
   slug: string
-  category: string
+  tags: string[]
   cardBody: string
   cardTitle: string
   date: string

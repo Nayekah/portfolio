@@ -9,9 +9,9 @@ export const tetBlog: BlogEntry = {
     'assets/fig3.png': fig3,
   },
   slug: 'tet',
-  category: '#Cryptography',
+  tags: ['Cryptography', 'Math'],
   cardBody:
-    'A general write-up about recovering hidden structure from modular relations, bounded noise, and partial leakage in cryptographic challenges.',
+    'An article about recovering hidden structure from modular relations, bounded noise, and partial leakage in cryptographic challenges.',
   cardTitle: 'Recovering Structure From a Noisy RSA With Lattice',
   date: 'February 16, 2026',
   markdown,

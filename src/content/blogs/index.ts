@@ -1,16 +1,31 @@
-﻿import type { ArticleCard, BlogEntry } from '../../types/content'
+import type { ArticleCard, BlogEntry } from '../../types/content'
 import { kfuncyBlog } from './kfuncy'
+import { latticoraBlog } from './latticora'
 import { tetBlog } from './tet'
 
-export const blogEntries: BlogEntry[] = [kfuncyBlog, tetBlog]
+export const blogEntries: BlogEntry[] = [latticoraBlog, kfuncyBlog, tetBlog]
 
 export const articleCards: ArticleCard[] = [
   {
-    category: kfuncyBlog.category,
+    tags: latticoraBlog.tags,
+    linkHref: `/blogs/${latticoraBlog.slug}`,
+    meta: latticoraBlog.meta,
+    date: latticoraBlog.date,
+    publishedAt: '2026-05-18',
+    title: latticoraBlog.cardTitle,
+    body: latticoraBlog.cardBody,
+    tone: 'blue',
+    coverAlt: 'Number Theoretic Transform illustration for the latticora write-up.',
+    coverImage: '/blogs/ntt.png',
+    hideCoverContent: true,
+    linkVariant: 'reference',
+  },
+  {
+    tags: kfuncyBlog.tags,
     linkHref: `/blogs/${kfuncyBlog.slug}`,
     meta: kfuncyBlog.meta,
     date: kfuncyBlog.date,
-    publishedAt: '2026-05-27',
+    publishedAt: '2026-02-16',
     title: kfuncyBlog.cardTitle,
     body: kfuncyBlog.cardBody,
     tone: 'ink',
@@ -20,7 +35,7 @@ export const articleCards: ArticleCard[] = [
     linkVariant: 'reference',
   },
   {
-    category: tetBlog.category,
+    tags: tetBlog.tags,
     linkHref: `/blogs/${tetBlog.slug}`,
     meta: tetBlog.meta,
     date: tetBlog.date,
@@ -34,16 +49,7 @@ export const articleCards: ArticleCard[] = [
     linkVariant: 'reference',
   },
   {
-    category: '#Systems',
-    meta: 'Lime',
-    date: 'February 17, 2026',
-    publishedAt: '2026-02-17',
-    title: 'Inside miscellaneous: notes, tags, and useful friction',
-    body: 'Designing a note system that supports writing and product work without becoming overhead.',
-    tone: 'paper',
-  },
-  {
-    category: '#Projects',
+    tags: ['Projects'],
     meta: 'The Portfolio',
     date: 'September 25, 2025',
     publishedAt: '2025-09-25',
@@ -87,4 +93,3 @@ export function getAdjacentBlogEntries(entry: BlogEntry) {
     nextEntry: orderedEntries[currentIndex + 1] ?? null,
   }
 }
-

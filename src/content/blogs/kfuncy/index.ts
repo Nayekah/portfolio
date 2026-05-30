@@ -13,7 +13,7 @@ export const kfuncyBlog: BlogEntry = {
     'assets/fig5.png': fig5,
   },
   slug: 'kfuncy',
-  category: '#Kernel Pwn',
+  tags: ['Kernel', 'PWN'],
   cardBody:
     'A Linux kernel challenge where one unchecked function-pointer index is enough to turn a read primitive into commit_creds(init_cred) and gain root.',
   cardTitle: 'Gaining Root Access With Just a Single Function Pointer in Linux Kernel Module',

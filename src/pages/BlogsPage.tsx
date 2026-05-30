@@ -213,6 +213,10 @@ function getBulletinCaption(article: ArticleCard) {
   return `${article.meta} · ${article.date}`
 }
 
+function renderTagLabel(tag: string) {
+  return tag.startsWith('#') ? tag : `#${tag}`
+}
+
 function ArticleArchiveCard({ article }: { article: ArticleCard }) {
   const href = getArticleHref(article)
   const Wrapper = href ? 'a' : 'article'
@@ -247,7 +251,13 @@ function ArticleArchiveCard({ article }: { article: ArticleCard }) {
         <span>{article.meta}</span>
         <span className="meta-sep">&bull;</span>
         <span>{article.date}</span>
-        <span className="article-tag">{article.category}</span>
+        <div className="article-tags" aria-label="Tags">
+          {article.tags.map((tag) => (
+            <span className="article-tag" key={tag}>
+              {renderTagLabel(tag)}
+            </span>
+          ))}
+        </div>
       </div>
 
       <div className="blogs-archive-card-title-row">
@@ -290,7 +300,7 @@ function BlogsPage({ year }: BlogsPageProps) {
   }, [search])
 
   const filters = useMemo(
-    () => ['All', ...Array.from(new Set(sortedArticles.map((article) => article.category)))],
+    () => ['All', ...Array.from(new Set(sortedArticles.flatMap((article) => article.tags)))],
     [sortedArticles]
   )
 
@@ -298,7 +308,7 @@ function BlogsPage({ year }: BlogsPageProps) {
     const normalizedSearch = debouncedSearch.trim().toLowerCase()
 
     return sortedArticles.filter((article) => {
-      const matchesFilter = activeFilter === 'All' || article.category === activeFilter
+      const matchesFilter = activeFilter === 'All' || article.tags.includes(activeFilter)
       if (!matchesFilter) {
         return false
       }
@@ -307,7 +317,7 @@ function BlogsPage({ year }: BlogsPageProps) {
         return true
       }
 
-      const haystack = [article.title, article.body, article.meta, article.category]
+      const haystack = [article.title, article.body, article.meta, ...article.tags]
         .join(' ')
         .toLowerCase()
 
@@ -397,7 +407,13 @@ function BlogsPage({ year }: BlogsPageProps) {
                             <span>{article.meta}</span>
                             <span className="meta-sep">&bull;</span>
                             <span>{article.date}</span>
-                            <span className="article-tag">{article.category}</span>
+                            <div className="article-tags" aria-label="Tags">
+                              {article.tags.map((tag) => (
+                                <span className="article-tag" key={tag}>
+                                  {renderTagLabel(tag)}
+                                </span>
+                              ))}
+                            </div>
                           </div>
                         </div>
                         <span className="article-link article-link-reference" aria-hidden="true">
@@ -421,7 +437,13 @@ function BlogsPage({ year }: BlogsPageProps) {
                           <span>{article.meta}</span>
                           <span className="meta-sep">&bull;</span>
                           <span>{article.date}</span>
-                          <span className="article-tag">{article.category}</span>
+                          <div className="article-tags" aria-label="Tags">
+                            {article.tags.map((tag) => (
+                              <span className="article-tag" key={tag}>
+                                {renderTagLabel(tag)}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </article>

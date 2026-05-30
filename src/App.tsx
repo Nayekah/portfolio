@@ -309,6 +309,14 @@ function getTypingDelay(character: string) {
   return 72
 }
 
+function renderTagLabel(tag: string) {
+  return tag.startsWith('#') ? tag : `#${tag}`
+}
+
+function getArticleHref(article: (typeof articleCards)[number]) {
+  return article.href ?? article.linkHref ?? null
+}
+
 function renderTypedLine(
   line: { prefix: string; highlight: string; suffix: string },
   visibleChars: number,
@@ -1166,8 +1174,8 @@ function App() {
           <StaggerGroup className="article-grid" stagger={0.1}>
             {articleCards.map((article) => (
               <StaggerItem key={article.title}>
-                {article.href ? (
-                  <a className="article-card article-card-link" href={article.href}>
+                {getArticleHref(article) ? (
+                  <a className="article-card article-card-link" href={getArticleHref(article) ?? undefined}>
                     <div
                       className={`article-cover tone-${article.tone}${
                         article.coverImage ? ' article-cover-with-image' : ''
@@ -1199,7 +1207,13 @@ function App() {
                       <span>{article.meta}</span>
                       <span className="meta-sep">&bull;</span>
                       <span>{article.date}</span>
-                      <span className="article-tag">{article.category}</span>
+                      <div className="article-tags" aria-label="Tags">
+                        {article.tags.map((tag) => (
+                          <span className="article-tag" key={tag}>
+                            {renderTagLabel(tag)}
+                          </span>
+                        ))}
+                      </div>
                     </div>
 
                     <div className="article-title-row">
@@ -1249,7 +1263,13 @@ function App() {
                       <span>{article.meta}</span>
                       <span className="meta-sep">&bull;</span>
                       <span>{article.date}</span>
-                      <span className="article-tag">{article.category}</span>
+                      <div className="article-tags" aria-label="Tags">
+                        {article.tags.map((tag) => (
+                          <span className="article-tag" key={tag}>
+                            {renderTagLabel(tag)}
+                          </span>
+                        ))}
+                      </div>
                     </div>
 
                     <div className="article-title-row">

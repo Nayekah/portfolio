@@ -12,6 +12,10 @@ type BlogPageProps = {
   year: number
 }
 
+function renderTagLabel(tag: string) {
+  return tag.startsWith('#') ? tag : `#${tag}`
+}
+
 function BlogPage({ entry, year }: BlogPageProps) {
   const { blocks, toc } = useMemo(() => parseBlogMarkdown(entry.markdown), [entry.markdown])
   const { nextEntry, previousEntry } = useMemo(() => getAdjacentBlogEntries(entry), [entry])
@@ -129,7 +133,13 @@ function BlogPage({ entry, year }: BlogPageProps) {
               <span>{entry.meta}</span>
               <span className="meta-sep">&bull;</span>
               <span>{entry.date}</span>
-              <span className="article-tag">{entry.category}</span>
+              <div className="article-tags" aria-label="Tags">
+                {entry.tags.map((tag) => (
+                  <span className="article-tag" key={tag}>
+                    {renderTagLabel(tag)}
+                  </span>
+                ))}
+              </div>
             </div>
 
             <div className="blog-title-divider" aria-hidden="true"></div>
