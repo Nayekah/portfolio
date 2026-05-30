@@ -22,6 +22,7 @@ export type ArticleCard = {
   linkHref?: string
   meta: string
   date: string
+  publishedAt?: string
   title: string
   body: string
   tone: string

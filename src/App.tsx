@@ -19,6 +19,7 @@ import BlogPage from './components/blogs/BlogPage'
 import SiteShell from './components/SiteShell'
 import { getCurrentPathname, resolveAppRoute } from './lib/routes'
 import AwardsPage from './pages/AwardsPage'
+import BlogsPage from './pages/BlogsPage'
 import ContactPage from './pages/ContactPage'
 import ProjectsPage from './pages/ProjectsPage'
 import MiscellaneousPage from './pages/MiscellaneousPage'
@@ -794,6 +795,8 @@ function App() {
     const pageIdentifier =
       activeRoute.type === 'home'
         ? 'Home'
+        : activeRoute.type === 'blogs'
+          ? 'Blogs'
         : activeRoute.type === 'projects'
           ? 'Projects'
           : activeRoute.type === 'contact'
@@ -849,6 +852,10 @@ function App() {
 
   if (activeRoute.type === 'contact') {
     return <ContactPage year={year} />
+  }
+
+  if (activeRoute.type === 'blogs') {
+    return <BlogsPage year={year} />
   }
 
   if (activeRoute.type === 'projects') {
@@ -1147,7 +1154,7 @@ function App() {
                 Essays, project pages, write-ups, and research fragments collected in one place.
               </p>
             </div>
-            <a className="button-outline" href="/projects#writings">
+            <a className="button-outline" href="/blogs">
               View all articles
             </a>
           </RevealBlock>

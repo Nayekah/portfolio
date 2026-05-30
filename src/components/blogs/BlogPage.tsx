@@ -90,7 +90,9 @@ function BlogPage({ entry, year }: BlogPageProps) {
         <div className="section-divider"></div>
 
         <div className="blog-breadcrumbs">
-          <a href="/#blogs">Blogs</a>
+          <a href="/">Main</a>
+          <span aria-hidden="true">&rsaquo;</span>
+          <a href="/blogs">Blogs</a>
           <span aria-hidden="true">&rsaquo;</span>
           <span>{entry.title}</span>
         </div>

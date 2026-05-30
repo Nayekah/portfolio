@@ -1,7 +1,7 @@
 ﻿import type { FooterColumn, NavItem } from '../types/content'
 
 export const navItems: NavItem[] = [
-  { href: '#blogs', label: 'blogs' },
+  { href: '/blogs', label: 'blogs' },
   { href: '/projects', label: 'projects' },
   { href: '/awards', label: 'awards' },
   { href: '/miscellaneous', label: 'miscellaneous' },
@@ -19,7 +19,7 @@ export const footerColumns: FooterColumn[] = [
   {
     heading: 'What I do',
     links: [
-      { href: '#blogs', label: 'Blogs' },
+      { href: '/blogs', label: 'Blogs' },
       { href: '/miscellaneous', label: 'Miscellaneous' },
     ],
   },
