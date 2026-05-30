@@ -16,7 +16,9 @@ export type SpotifyTrackPreview = {
 }
 
 export type RecentlyPlayedResponse = {
+  cached?: boolean
   message?: string
+  stale?: boolean
   track: RecentlyPlayedTrack | null
 }
 

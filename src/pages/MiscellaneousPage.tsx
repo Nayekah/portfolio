@@ -11,7 +11,7 @@ import {
   type SpotifyTrackPreview,
 } from '../lib/spotify'
 
-const SPOTIFY_REFRESH_INTERVAL_MS = 20_000
+const SPOTIFY_REFRESH_INTERVAL_MS = 120_000
 const SPOTIFY_FALLBACK_MESSAGE = 'Spotify listening data is temporarily unavailable.'
 const SPOTIFY_TOP_SONGS_FALLBACK_MESSAGE = 'Spotify song details are temporarily unavailable.'
 
@@ -279,35 +279,14 @@ function MiscellaneousPage({ year }: MiscellaneousPageProps) {
   const [spotifyMessage, setSpotifyMessage] = useState('Connecting to Spotify...')
   const [spotifyState, setSpotifyState] = useState<'loading' | 'ready' | 'unavailable'>('loading')
   const [topSongsMessage, setTopSongsMessage] = useState('Loading selected songs...')
+  const latestTrackRef = useRef<RecentlyPlayedTrack | null>(null)
+
+  useEffect(() => {
+    latestTrackRef.current = track
+  }, [track])
 
   useEffect(() => {
     const controller = new AbortController()
-    let intervalId: number | null = null
-
-    const loadTrack = async (signal: AbortSignal) => {
-      try {
-        const payload = await fetchRecentlyPlayedTrack(signal)
-
-        if (payload.track) {
-          setTrack(payload.track)
-          setSpotifyMessage('')
-          setSpotifyState('ready')
-          return
-        }
-
-        setSpotifyMessage(payload.message ?? 'No recently played track is available right now.')
-        setTrack(null)
-        setSpotifyState('unavailable')
-      } catch (error) {
-        if ((error as Error).name === 'AbortError') {
-          return
-        }
-
-        setSpotifyMessage(SPOTIFY_FALLBACK_MESSAGE)
-        setTrack(null)
-        setSpotifyState('unavailable')
-      }
-    }
 
     const loadTopSongs = async (signal: AbortSignal) => {
       try {
@@ -331,17 +310,99 @@ function MiscellaneousPage({ year }: MiscellaneousPageProps) {
       }
     }
 
-    loadTrack(controller.signal)
     loadTopSongs(controller.signal)
-    intervalId = window.setInterval(() => {
-      void loadTrack(controller.signal)
-    }, SPOTIFY_REFRESH_INTERVAL_MS)
 
     return () => {
       controller.abort()
+    }
+  }, [])
+
+  useEffect(() => {
+    let intervalId: number | null = null
+    let requestController: AbortController | null = null
+    let isDisposed = false
+
+    const clearTrackInterval = () => {
       if (intervalId !== null) {
         window.clearInterval(intervalId)
+        intervalId = null
       }
+    }
+
+    const loadTrack = async () => {
+      requestController?.abort()
+      requestController = new AbortController()
+
+      try {
+        const payload = await fetchRecentlyPlayedTrack(requestController.signal)
+
+        if (isDisposed) {
+          return
+        }
+
+        if (payload.track) {
+          latestTrackRef.current = payload.track
+          setTrack(payload.track)
+          setSpotifyMessage(payload.message ?? '')
+          setSpotifyState('ready')
+          return
+        }
+
+        latestTrackRef.current = null
+        setTrack(null)
+        setSpotifyMessage(payload.message ?? 'No recently played track is available right now.')
+        setSpotifyState('unavailable')
+      } catch (error) {
+        if ((error as Error).name === 'AbortError' || isDisposed) {
+          return
+        }
+
+        if (latestTrackRef.current) {
+          setSpotifyMessage((error as Error).message ?? SPOTIFY_FALLBACK_MESSAGE)
+          setSpotifyState('ready')
+          return
+        }
+
+        latestTrackRef.current = null
+        setTrack(null)
+        setSpotifyMessage(SPOTIFY_FALLBACK_MESSAGE)
+        setSpotifyState('unavailable')
+      }
+    }
+
+    const startTrackPolling = () => {
+      if (document.visibilityState === 'hidden' || intervalId !== null) {
+        return
+      }
+
+      intervalId = window.setInterval(() => {
+        void loadTrack()
+      }, SPOTIFY_REFRESH_INTERVAL_MS)
+    }
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        requestController?.abort()
+        clearTrackInterval()
+        return
+      }
+
+      void loadTrack()
+      startTrackPolling()
+    }
+
+    if (document.visibilityState === 'visible') {
+      void loadTrack()
+      startTrackPolling()
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    return () => {
+      isDisposed = true
+      requestController?.abort()
+      clearTrackInterval()
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
   }, [])
 
