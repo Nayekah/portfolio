@@ -193,7 +193,7 @@ const heroProfileLinks: HeroProfileLink[] = [
     label: 'Instagram',
   },
   {
-    href: 'mailto:nayakghana39@gmail.com',
+    href: 'mailto:nayakaghana39@gmail.com',
     icon: FiMail,
     label: 'Email',
   },
@@ -242,7 +242,7 @@ function createPersonJsonLd() {
     url: `${siteUrl}/`,
     image: `${siteUrl}/profile.jpeg`,
     jobTitle: 'Security-focused Software Engineer',
-    email: 'mailto:nayakghana39@gmail.com',
+    email: 'mailto:nayakaghana39@gmail.com',
     sameAs: personProfiles,
     alumniOf: {
       '@type': 'CollegeOrUniversity',
@@ -1033,7 +1033,7 @@ function App() {
             mainEntity: {
               '@type': 'Person',
               name: personName,
-              email: 'mailto:nayakghana39@gmail.com',
+              email: 'mailto:nayakaghana39@gmail.com',
               sameAs: personProfiles,
             },
           },

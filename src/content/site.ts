@@ -32,7 +32,7 @@ export const footerColumns: FooterColumn[] = [
         label: 'LinkedIn',
         external: true,
       },
-      { href: 'mailto:nayakghana39@gmail.com', label: 'Email' },
+      { href: 'mailto:nayakaghana39@gmail.com', label: 'Email' },
     ],
   },
 ]

@@ -25,7 +25,7 @@ const socialLinks = [
     toneClassName: 'tone-linkedin',
   },
   {
-    href: 'mailto:nayakghana39@gmail.com',
+    href: 'mailto:nayakaghana39@gmail.com',
     icon: SiGmail,
     label: 'Gmail',
     toneClassName: 'tone-gmail',
