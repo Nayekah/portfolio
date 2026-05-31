@@ -47,7 +47,7 @@ function getRippleRadius({ x, y }: ThemeOrigin) {
 }
 
 function ThemeProvider({ children }: ThemeProviderProps) {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
   const [theme, setTheme] = useState<Theme>(() => getStoredTheme())
   const [isTransitioning, setIsTransitioning] = useState(false)
 

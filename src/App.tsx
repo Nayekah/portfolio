@@ -1,5 +1,6 @@
 ﻿import { useEffect, useMemo, useRef, useState } from 'react'
 import type { CSSProperties, FocusEventHandler, MouseEventHandler, ReactNode } from 'react'
+import type { IconType } from 'react-icons'
 import { FiArrowUpRight, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
 import { BsInstagram, BsTwitterX } from 'react-icons/bs'
 import { SiCodeforces } from 'react-icons/si'
@@ -82,6 +83,18 @@ type StaggerProps = {
   delayChildren?: number
   stagger?: number
 }
+
+type HeroProfileLink =
+  | {
+      href: string
+      icon: IconType
+      label: string
+    }
+  | {
+      custom: 'cryptohack'
+      href: string
+      label: string
+    }
 
 const logoItems: LogoItem[] = [
   { name: 'Solidity', logo: '/tech-icons/solidity.svg' },
@@ -167,7 +180,7 @@ const heroTypingLine2 = {
   suffix: ' anyway.',
 }
 
-const heroProfileLinks = [
+const heroProfileLinks: HeroProfileLink[] = [
   {
     href: 'https://x.com/Katounasai',
     icon: BsTwitterX,
@@ -224,7 +237,7 @@ function RevealBlock({
   id,
   ...props
 }: RevealProps) {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
 
   return (
     <motion.div
@@ -253,7 +266,7 @@ function StaggerGroup({
   delayChildren = 0,
   stagger = 0.12,
 }: StaggerProps) {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
 
   return (
     <motion.div
@@ -278,7 +291,7 @@ function StaggerGroup({
 }
 
 function StaggerItem({ children, className }: { children: ReactNode; className?: string }) {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
 
   return (
     <motion.div
@@ -357,7 +370,7 @@ function ScrambleText({
   settleDelay?: number
   text: string
 }) {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
   const [displayText, setDisplayText] = useState(text)
   const resolvedText = shouldReduceMotion || !active ? text : displayText
 
@@ -476,7 +489,7 @@ function CryptoHackMark() {
 }
 
 function TypingHeroTitle() {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
   const line1Text = `${heroTypingLine1.prefix}${heroTypingLine1.highlight}${heroTypingLine1.suffix}`
   const line2Text = `${heroTypingLine2.prefix}${heroTypingLine2.highlight}${heroTypingLine2.suffix}`
   const [line1Chars, setLine1Chars] = useState(shouldReduceMotion ? line1Text.length : 0)
@@ -552,7 +565,7 @@ function TypingHeroTitle() {
 }
 
 function TechStackCarousel() {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
   const trackRef = useRef<HTMLDivElement | null>(null)
   const loopWidthRef = useRef(0)
   const currentSpeedRef = useRef(72)
@@ -641,7 +654,7 @@ function TechStackCarousel() {
 }
 
 function HeroPolaroid() {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
   const rotateX = useMotionValue(-5)
   const rotateY = useMotionValue(6)
   const scale = useMotionValue(1)
@@ -734,7 +747,7 @@ function HeroPolaroid() {
 }
 
 function AwardPolaroidCard({ award }: { award: FeaturedAward }) {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
   const rotateX = useMotionValue(0)
   const rotateY = useMotionValue(0)
   const scale = useMotionValue(1)
@@ -787,7 +800,7 @@ function AwardPolaroidCard({ award }: { award: FeaturedAward }) {
 }
 
 function App() {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
   const [activeMetric, setActiveMetric] = useState(0)
   const [activeAward, setActiveAward] = useState(0)
   const [isMetricAutoplayPaused, setIsMetricAutoplayPaused] = useState(false)

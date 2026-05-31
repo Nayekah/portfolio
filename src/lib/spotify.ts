@@ -30,7 +30,9 @@ export type TopSongsResponse = {
 const SPOTIFY_RECENTLY_PLAYED_ERROR_MESSAGE = 'Spotify listening data is temporarily unavailable.'
 const SPOTIFY_TOP_SONGS_ERROR_MESSAGE = 'Spotify song details are temporarily unavailable.'
 
-export async function fetchRecentlyPlayedTrack(signal?: AbortSignal) {
+export async function fetchRecentlyPlayedTrack(
+  signal?: AbortSignal
+): Promise<RecentlyPlayedResponse> {
   let response: Response
 
   try {
@@ -61,10 +63,14 @@ export async function fetchRecentlyPlayedTrack(signal?: AbortSignal) {
     throw new Error(payload?.message ?? SPOTIFY_RECENTLY_PLAYED_ERROR_MESSAGE)
   }
 
+  if (!payload) {
+    throw new Error(SPOTIFY_RECENTLY_PLAYED_ERROR_MESSAGE)
+  }
+
   return payload
 }
 
-export async function fetchTopSongs(signal?: AbortSignal) {
+export async function fetchTopSongs(signal?: AbortSignal): Promise<TopSongsResponse> {
   let response: Response
 
   try {
@@ -93,6 +99,10 @@ export async function fetchTopSongs(signal?: AbortSignal) {
 
   if (!response.ok) {
     throw new Error(payload?.message ?? SPOTIFY_TOP_SONGS_ERROR_MESSAGE)
+  }
+
+  if (!payload) {
+    throw new Error(SPOTIFY_TOP_SONGS_ERROR_MESSAGE)
   }
 
   return payload

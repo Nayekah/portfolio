@@ -1,7 +1,5 @@
 /* global process */
 
-import path from 'node:path'
-import { pathToFileURL } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -19,11 +17,8 @@ function spotifyApiDevPlugin(mode) {
       }
     }
 
-    const moduleUrl = new URL(
-      `?ts=${Date.now()}`,
-      pathToFileURL(path.resolve(server.config.root, endpointFile))
-    )
-    const { default: handler } = await import(moduleUrl.href)
+    const moduleUrl = `/${endpointFile}?t=${Date.now()}`
+    const { default: handler } = await server.ssrLoadModule(moduleUrl)
 
     const apiResponse = {
       status(code) {
@@ -51,12 +46,12 @@ function spotifyApiDevPlugin(mode) {
       const routes = [
         {
           path: '/api/spotify/recently-played',
-          endpointFile: 'api/spotify/recently-played.js',
+          endpointFile: 'api/spotify/recently-played.ts',
           fallback: { message: 'Spotify dev middleware failed while handling the request.', track: null },
         },
         {
           path: '/api/spotify/top-songs',
-          endpointFile: 'api/spotify/top-songs.js',
+          endpointFile: 'api/spotify/top-songs.ts',
           fallback: { message: 'Spotify dev middleware failed while handling the request.', tracks: [] },
         },
       ]

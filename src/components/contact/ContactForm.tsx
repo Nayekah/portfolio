@@ -77,6 +77,14 @@ function getFieldError(fieldName: keyof ContactFormErrors, form: HTMLFormElement
   return ''
 }
 
+function focusNamedField(form: HTMLFormElement, fieldName: string) {
+  const field = form.elements.namedItem(fieldName)
+
+  if (field instanceof HTMLElement) {
+    field.focus()
+  }
+}
+
 function ContactForm() {
   const [errors, setErrors] = useState<ContactFormErrors>({})
   const [submitAttempted, setSubmitAttempted] = useState(false)
@@ -174,19 +182,19 @@ function ContactForm() {
         )
 
       if (nextErrors.name) {
-        form.elements.namedItem('name')?.focus()
+        focusNamedField(form, 'name')
       } else if (nextErrors.email) {
-        form.elements.namedItem('email')?.focus()
+        focusNamedField(form, 'email')
       } else if (nextErrors.services) {
         form.querySelector<HTMLInputElement>('input[name="services"]')?.focus()
       } else if (nextErrors.scope) {
-        form.elements.namedItem('scope')?.focus()
+        focusNamedField(form, 'scope')
       } else if (nextErrors.references) {
-        form.elements.namedItem('references')?.focus()
+        focusNamedField(form, 'references')
       } else if (nextErrors.timeline) {
-        form.elements.namedItem('timeline')?.focus()
+        focusNamedField(form, 'timeline')
       } else if (nextErrors.referrer) {
-        form.elements.namedItem('referrer')?.focus()
+        focusNamedField(form, 'referrer')
       } else {
         firstInvalidField?.focus()
       }

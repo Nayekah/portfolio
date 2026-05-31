@@ -83,7 +83,7 @@ function renderTypedLine(line: TypedLine, visibleChars: number, showCursor: bool
 }
 
 function TypedContactTitle({ className }: { className: string }) {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
   const titleRef = useRef<HTMLHeadingElement | null>(null)
   const line1Text = `${contactTypingLine.prefix}${contactTypingLine.highlight}${contactTypingLine.suffix}`
   const line2Text = `${contactTypingLine2.prefix}${contactTypingLine2.highlight}${contactTypingLine2.suffix}`
@@ -193,7 +193,7 @@ function RevealBlock({
   className?: string
   delay?: number
 }) {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
 
   return (
     <motion.div

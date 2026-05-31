@@ -1,4 +1,4 @@
-﻿import { getBlogEntryByPath } from '../content/blogs'
+import { getBlogEntryByPath } from '../content/blogs'
 import type { BlogEntry } from '../types/content'
 
 type AppRoute =
@@ -53,4 +53,3 @@ export function resolveAppRoute(pathname: string): AppRoute {
 
   return { type: 'home' }
 }
-

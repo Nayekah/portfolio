@@ -40,7 +40,7 @@ const blogsTypingLine: TypedLine = {
 const INITIAL_VISIBLE_BLOGS = 8
 
 function RevealBlock({ amount = 0.2, children, className, delay = 0 }: RevealProps) {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
 
   return (
     <motion.div
@@ -67,7 +67,7 @@ function StaggerGroup({
   delayChildren = 0,
   stagger = 0.08,
 }: StaggerProps) {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
 
   return (
     <motion.div
@@ -92,7 +92,7 @@ function StaggerGroup({
 }
 
 function StaggerItem({ children, className }: { children: ReactNode; className?: string }) {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
 
   return (
     <motion.div
@@ -144,7 +144,7 @@ function renderTypedLine(line: TypedLine, visibleChars: number, showCursor: bool
 }
 
 function TypedSectionTitle({ className, line }: { className: string; line: TypedLine }) {
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
   const titleRef = useRef<HTMLHeadingElement | null>(null)
   const fullText = `${line.prefix}${line.highlight}${line.suffix}`
   const [isActive, setIsActive] = useState(shouldReduceMotion)
