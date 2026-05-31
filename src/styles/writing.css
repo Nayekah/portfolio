@@ -1,0 +1,126 @@
+.writing-page-main {
+  padding-bottom: 2.5rem;
+}
+
+.writing-page-section {
+  padding-bottom: 0;
+}
+
+.writing-page-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.88fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+  margin-top: clamp(4rem, 8vw, 6.5rem);
+  padding: 0.2rem 0 2rem;
+}
+
+.writing-page-title {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(2.05rem, 2.75vw, 3rem);
+  line-height: 1.02;
+  white-space: nowrap;
+}
+
+.writing-page-intro {
+  padding-top: clamp(0.8rem, 3vw, 2rem);
+  border-top: 1px solid var(--line);
+}
+
+.writing-page-intro p {
+  max-width: 40rem;
+  padding-top: 1rem;
+  font-size: clamp(0.98rem, 1.1vw, 1.08rem);
+  line-height: 1.55;
+}
+
+.writing-table {
+  display: grid;
+  padding-bottom: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+
+.writing-table-head,
+.writing-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.9fr) minmax(260px, 1.8fr) minmax(320px, 2fr) minmax(220px, 1.15fr) auto;
+  gap: 1rem;
+  align-items: start;
+}
+
+.writing-table-head {
+  padding: 1rem 0 0.9rem;
+  color: var(--ink);
+  font-family: 'Unica77';
+  font-size: 0.98rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.writing-row {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-soft);
+  opacity: 1;
+  transition:
+    opacity 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease;
+}
+
+.writing-cell {
+  min-width: 0;
+  color: var(--ink);
+}
+
+.writing-date,
+.writing-course,
+.writing-summary {
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.writing-title {
+  font-family: 'Unica77';
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.writing-summary,
+.writing-course {
+  color: var(--ink-soft);
+}
+
+.writing-link {
+  justify-self: end;
+}
+
+.writing-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.writing-link a:hover,
+.writing-link a:focus-visible {
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.writing-link svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.writing-table:hover .writing-row {
+  opacity: 0.34;
+}
+
+.writing-table:hover .writing-row:hover,
+.writing-row:focus-within {
+  opacity: 1;
+  border-bottom-color: var(--ink);
+}
+

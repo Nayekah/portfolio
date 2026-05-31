@@ -1,7 +1,7 @@
 import { getBlogEntryByPath } from '../content/blogs'
 import type { BlogEntry } from '../types/content'
 
-type AppRoute =
+export type AppRoute =
   | { type: 'home' }
   | { type: 'contact' }
   | { type: 'projects' }

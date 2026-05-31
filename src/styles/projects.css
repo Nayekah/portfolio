@@ -1,0 +1,73 @@
+.projects-page-kicker,
+.project-case-label {
+  display: inline-block;
+  color: var(--muted);
+  font-size: 0.92rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.projects-page-title {
+  max-width: 11ch;
+  margin-top: 0.8rem;
+  font-size: clamp(2.05rem, 2.75vw, 3rem);
+  line-height: 1.02;
+}
+
+.projects-page-intro {
+  border-top: 1px solid var(--line);
+}
+
+.projects-page-intro p {
+  max-width: 40rem;
+  padding-top: 1rem;
+  font-size: clamp(0.98rem, 1.1vw, 1.08rem);
+  line-height: 1.55;
+}
+
+.projects-ledger {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  width: 100%;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  align-items: stretch;
+}
+
+.projects-page-cta {
+  display: flex;
+  justify-content: center;
+  padding: 1.25rem 0 0;
+}
+
+.projects-page-back-home,
+.page-back-home {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 2.25rem;
+}
+
+.projects-page-back-home a,
+.page-back-home a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.projects-page-back-home a::before,
+.page-back-home a::before {
+  content: "\2190";
+  font-size: 0.95em;
+}
+
+.projects-page-back-home a:hover,
+.projects-page-back-home a:focus-visible,
+.page-back-home a:hover,
+.page-back-home a:focus-visible {
+  color: var(--ink);
+  transform: translateX(-1px);
+}
+
