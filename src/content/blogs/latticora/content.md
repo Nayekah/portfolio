@@ -1,5 +1,7 @@
 This article covers `latticora`, a cryptography challenge from **Cyber Breaker Competition Promotional 2026**, authored by **merricx**. The title sounds dramatic, but the challenge is not really about breaking post-quantum cryptography in the generic sense. It is about exploiting a very specific leakage pattern around an ML-KEM-512 instance until the rest of the scheme becomes solvable with linear algebra.
 
+<figure><img src="assets/first-blood.jpg" alt=""><figcaption></figcaption></figure>
+
 What follows is the path I used to recover the leaked error vector, turn the public key back into an LWE instance, and reconstruct the secret.
 
 ### Initial Analysis

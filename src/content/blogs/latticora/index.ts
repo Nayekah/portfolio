@@ -1,9 +1,11 @@
 import markdown from './content.md?raw'
+import fb from './assets/first-blood.png'
 import fig2 from './assets/fig2.jpg'
 import type { BlogEntry } from '../../../types/content'
 
 export const latticoraBlog: BlogEntry = {
     assets: {
+    'assets/first-blood.jpg': fb,
     'assets/fig2.jpg': fig2,
   },
   slug: 'latticora',
