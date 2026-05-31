@@ -54,14 +54,16 @@
 .footer-column a::after,
 .footer-back-top::after {
   display: inline-block;
-  content: "\2197";
+  content: '\2197';
   margin-left: 0.22rem;
   font-size: 0.95em;
-  transition: transform 180ms ease, opacity 180ms ease;
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease;
 }
 
 .footer-back-top::after {
-  content: "\2191";
+  content: '\2191';
 }
 
 .footer-column a:hover,
@@ -95,4 +97,3 @@
 .footer-bottom a {
   color: var(--footer-ink);
 }
-

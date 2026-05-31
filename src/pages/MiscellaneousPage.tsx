@@ -95,21 +95,24 @@ const topBooks = [
     meta: 'Frank Herbert',
     detail: '1965',
     href: 'https://en.wikipedia.org/wiki/Dune_(novel)',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/be/Dune_by_Frank_Herbert_first_edition_cover.jpg',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/b/be/Dune_by_Frank_Herbert_first_edition_cover.jpg',
   },
-    {
-      title: "Omniscient Reader's Viewpoint",
-      meta: 'sing N song',
-      detail: '2018',
-      href: 'https://en.wikipedia.org/wiki/Omniscient_Reader%27s_Viewpoint',
-      image: 'https://images.yenpress.com/imgs/9798400901065.jpg?h=612&s=722d8d575c94d10d23e8dbe9bff4d87e&type=books&w=408',
-    },
+  {
+    title: "Omniscient Reader's Viewpoint",
+    meta: 'sing N song',
+    detail: '2018',
+    href: 'https://en.wikipedia.org/wiki/Omniscient_Reader%27s_Viewpoint',
+    image:
+      'https://images.yenpress.com/imgs/9798400901065.jpg?h=612&s=722d8d575c94d10d23e8dbe9bff4d87e&type=books&w=408',
+  },
   {
     title: 'The Lord of the Rings',
     meta: 'J. R. R. Tolkien',
     detail: '1954',
     href: 'https://en.wikipedia.org/wiki/The_Lord_of_the_Rings',
-    image: 'https://upload.wikimedia.org/wikipedia/en/e/e9/First_Single_Volume_Edition_of_The_Lord_of_the_Rings.gif',
+    image:
+      'https://upload.wikimedia.org/wikipedia/en/e/e9/First_Single_Volume_Edition_of_The_Lord_of_the_Rings.gif',
   },
 ]
 
@@ -471,7 +474,9 @@ function MiscellaneousPage({ year }: MiscellaneousPageProps) {
                   </div>
 
                   <div className="miscellaneous-spotify-copy">
-                    <p className="miscellaneous-spotify-status">{formatPlayedAtLabel(track.playedAt)}</p>
+                    <p className="miscellaneous-spotify-status">
+                      {formatPlayedAtLabel(track.playedAt)}
+                    </p>
                     <a
                       className="miscellaneous-spotify-title"
                       href={track.href}
@@ -632,5 +637,3 @@ function MiscellaneousPage({ year }: MiscellaneousPageProps) {
 }
 
 export default MiscellaneousPage
-
-

@@ -4,7 +4,7 @@ What follows is the path I used to break the challenge down, starting from the g
 
 ### Initial Analysis
 
-In this challenge, we are given some big RSA scheme, and the source code given in  `tet_tet-dist.zip`. Here are the screenshots of the content:
+In this challenge, we are given some big RSA scheme, and the source code given in `tet_tet-dist.zip`. Here are the screenshots of the content:
 
 <figure><img src="assets/fig2.png" alt=""><figcaption></figcaption></figure>
 
@@ -63,7 +63,7 @@ print(open("flag.txt").read().strip())
 
 Well to sum things up, we have $N$, $a/b$, $f$, $z$, $g$, and $U_2$ for each round. The goal are to recovering $s$ so we can guess the $ss$.
 
-***
+---
 
 ### Recovering M1
 
@@ -129,12 +129,12 @@ $$
 x_0 \equiv r_0 \pmod{qq}
 $$
 
-and $r_0$ small.  If $qq = M_1$ (or one of its multiple), then $r_0 = c_0$ also small.
+and $r_0$ small. If $qq = M_1$ (or one of its multiple), then $r_0 = c_0$ also small.
 
 So to make the basis for the lattice, we need to consider these things:
 
-* Choose bounded noise and number of samples;
-* Make the basis so that
+- Choose bounded noise and number of samples;
+- Make the basis so that
 
 $$
 B \in \mathbb{Z}^{t \times t}
@@ -184,7 +184,7 @@ $$
 
 Yayyy, we get the $M_1$!
 
-***
+---
 
 ### Recovering e
 
@@ -214,7 +214,7 @@ $$
 
 Hooray.
 
-***
+---
 
 ### Recovering (a, b)
 
@@ -250,7 +250,7 @@ $$
 
 The solution will be unique.
 
-***
+---
 
 ### Recovering (k,d)
 
@@ -294,7 +294,7 @@ $$
 
 With that conditions, we can recover $(k,d)$ by using continued fractions!
 
-***
+---
 
 ### Recovering Prime Factors
 
@@ -344,7 +344,7 @@ $$
 
 then, we can get the $p$ by searching for third root of $X$, then we also can get the $q$ by dividing $N$ with $p$.
 
-***
+---
 
 ### Recovering s :3
 

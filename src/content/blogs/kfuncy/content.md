@@ -66,7 +66,7 @@ Disassembly of section .text:
    f:	90                   	nop
 
 0000000000000010 <kfuncy_write>:
-  10:	f3 0f 1e fa          	endbr64 
+  10:	f3 0f 1e fa          	endbr64
   14:	ba 04 00 00 00       	mov    $0x4,%edx
   19:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
 			1c: R_X86_64_32S	.rodata.str1.1
@@ -78,7 +78,7 @@ Disassembly of section .text:
   2d:	e9 00 00 00 00       	jmp    32 <kfuncy_write+0x22>
 			2e: R_X86_64_PLT32	__x86_return_thunk-0x4
   32:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
-  39:	00 00 00 00 
+  39:	00 00 00 00
   3d:	0f 1f 00             	nopl   (%rax)
 
 0000000000000040 <__pfx_kfuncy_read>:
@@ -100,7 +100,7 @@ Disassembly of section .text:
   4f:	90                   	nop
 
 0000000000000050 <kfuncy_read>:
-  50:	f3 0f 1e fa          	endbr64 
+  50:	f3 0f 1e fa          	endbr64
   54:	ba 08 00 00 00       	mov    $0x8,%edx
   59:	e8 00 00 00 00       	call   5e <kfuncy_read+0xe>
 			5a: R_X86_64_PLT32	_copy_to_user-0x4
@@ -130,32 +130,32 @@ Disassembly of section .text:
   7f:	90                   	nop
 
 0000000000000080 <kfuncy_ioctl>:
-  80:	f3 0f 1e fa          	endbr64 
+  80:	f3 0f 1e fa          	endbr64
   84:	48 83 ec 30          	sub    $0x30,%rsp
   88:	48 89 d6             	mov    %rdx,%rsi
   8b:	ba 18 00 00 00       	mov    $0x18,%edx
   90:	65 48 8b 05 00 00 00 	mov    %gs:0x0(%rip),%rax        # 98 <kfuncy_ioctl+0x18>
-  97:	00 
+  97:	00
 			94: R_X86_64_PC32	__ref_stack_chk_guard-0x4
   98:	48 89 44 24 28       	mov    %rax,0x28(%rsp)
   9d:	31 c0                	xor    %eax,%eax
   9f:	48 89 e7             	mov    %rsp,%rdi
   a2:	48 c7 04 24 00 00 00 	movq   $0x0,(%rsp)
-  a9:	00 
+  a9:	00
   aa:	48 c7 44 24 08 00 00 	movq   $0x0,0x8(%rsp)
-  b1:	00 00 
+  b1:	00 00
   b3:	48 c7 44 24 10 00 00 	movq   $0x0,0x10(%rsp)
-  ba:	00 00 
+  ba:	00 00
   bc:	e8 00 00 00 00       	call   c1 <kfuncy_ioctl+0x41>
 			bd: R_X86_64_PLT32	_copy_from_user-0x4
   c1:	48 85 c0             	test   %rax,%rax
   c4:	75 48                	jne    10e <kfuncy_ioctl+0x8e>
   c6:	48 c7 44 24 18 00 00 	movq   $0x0,0x18(%rsp)
-  cd:	00 00 
+  cd:	00 00
 			cb: R_X86_64_32S	.text+0x50
   cf:	48 63 44 24 10       	movslq 0x10(%rsp),%rax
   d4:	48 c7 44 24 20 00 00 	movq   $0x0,0x20(%rsp)
-  db:	00 00 
+  db:	00 00
 			d9: R_X86_64_32S	.text+0x10
   dd:	85 c0                	test   %eax,%eax
   df:	78 36                	js     117 <kfuncy_ioctl+0x97>
@@ -164,10 +164,10 @@ Disassembly of section .text:
   eb:	48 8b 3c 24          	mov    (%rsp),%rdi
   ef:	e8 00 00 00 00       	call   f4 <kfuncy_ioctl+0x74>
 			f0: R_X86_64_PLT32	__x86_indirect_thunk_rax-0x4
-  f4:	48 98                	cltq   
+  f4:	48 98                	cltq
   f6:	48 8b 54 24 28       	mov    0x28(%rsp),%rdx
   fb:	65 48 2b 15 00 00 00 	sub    %gs:0x0(%rip),%rdx        # 103 <kfuncy_ioctl+0x83>
- 102:	00 
+ 102:	00
 			ff: R_X86_64_PC32	__ref_stack_chk_guard-0x4
  103:	75 1b                	jne    120 <kfuncy_ioctl+0xa0>
  105:	48 83 c4 30          	add    $0x30,%rsp
@@ -201,7 +201,7 @@ Disassembly of section .init.text:
    f:	90                   	nop
 
 0000000000000010 <init_module>:
-  10:	f3 0f 1e fa          	endbr64 
+  10:	f3 0f 1e fa          	endbr64
   14:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
 			17: R_X86_64_32S	.data
   1b:	e9 00 00 00 00       	jmp    20 <_note_18+0x8>
@@ -228,7 +228,7 @@ Disassembly of section .exit.text:
    f:	90                   	nop
 
 0000000000000010 <cleanup_module>:
-  10:	f3 0f 1e fa          	endbr64 
+  10:	f3 0f 1e fa          	endbr64
   14:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
 			17: R_X86_64_32S	.data
   1b:	e9 00 00 00 00       	jmp    20 <_note_18+0x8>
@@ -442,7 +442,6 @@ The approach can be broken down into three main stages.
    ```
 
    In particular, the two addresses that matter most are:
-
    1. `commit_creds_runtime`
    2. `init_cred_runtime`
 
@@ -461,13 +460,11 @@ The approach can be broken down into three main stages.
    That is exactly what the final step does.
 
    The relevant facts are:
-
    1. The function pointer is fetched from the stack using an attacker-controlled out-of-bounds index.
    2. The `ioctl` syscall `request` argument is saved in `pt_regs->si`.
    3. On this kernel/module build, the out-of-bounds slot that aliases `pt_regs->si` is stable at `idx = 29`.
 
    Once that is known, the final trigger becomes very small:
-
    1. Set the `ioctl` request value to `commit_creds_runtime`.
    2. Set the controlled argument structure so that:
       1. `a0 = init_cred_runtime`
@@ -931,6 +928,5 @@ int main(void) {
 Compile `exploit.c` first, then run it in the target environment.
 
 <figure><img src="assets/fig5.png" alt=""><figcaption></figcaption></figure>
-
 
 And.. yeah, we got it!

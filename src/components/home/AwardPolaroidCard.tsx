@@ -1,5 +1,11 @@
 import type { PointerEvent as ReactPointerEvent } from 'react'
-import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring } from 'motion/react'
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+} from 'motion/react'
 import type { FeaturedAward } from '../../types/content'
 
 function AwardPolaroidCard({ award }: { award: FeaturedAward }) {

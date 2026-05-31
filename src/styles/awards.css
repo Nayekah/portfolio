@@ -105,7 +105,12 @@
 }
 
 .awards-education-photo::after {
-  background: linear-gradient(180deg, transparent 54%, rgba(255, 255, 255, 0.14) 74%, rgba(255, 255, 255, 0.92) 100%);
+  background: linear-gradient(
+    180deg,
+    transparent 54%,
+    rgba(255, 255, 255, 0.14) 74%,
+    rgba(255, 255, 255, 0.92) 100%
+  );
 }
 
 .awards-education-photo figcaption {
@@ -289,9 +294,11 @@
   overflow: hidden;
   background:
     linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
-    #dad8d1;
-  background-size: 1.3rem 1.3rem, 1.3rem 1.3rem, auto;
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px), #dad8d1;
+  background-size:
+    1.3rem 1.3rem,
+    1.3rem 1.3rem,
+    auto;
 }
 
 .awards-floating-media img {
@@ -309,4 +316,3 @@
   filter: grayscale(0) saturate(1.05) contrast(1.02);
   transform: scale(1.025);
 }
-

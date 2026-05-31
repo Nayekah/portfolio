@@ -9,10 +9,10 @@ function ProofSection() {
         <RevealBlock className="proof-copy">
           <h2>Tech stack I use.</h2>
           <p>
-            This stack reflects the work I spend most of my time on: smart contracts,
-            low-level programming, backend systems, security-oriented engineering, and product
-            tooling. It is the mix I rely on to build, test, document, and ship technical work
-            across both software and blockchain environments.
+            This stack reflects the work I spend most of my time on: smart contracts, low-level
+            programming, backend systems, security-oriented engineering, and product tooling. It is
+            the mix I rely on to build, test, document, and ship technical work across both software
+            and blockchain environments.
           </p>
         </RevealBlock>
 

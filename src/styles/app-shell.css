@@ -217,8 +217,14 @@
 
 .social-overlay-link.tone-instagram:hover,
 .social-overlay-link.tone-instagram:focus-visible {
-  background:
-    radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 7%, #fd5949 42%, #d6249f 68%, #285aeb 100%);
+  background: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 7%,
+    #fd5949 42%,
+    #d6249f 68%,
+    #285aeb 100%
+  );
   color: #ffffff;
 }
 
@@ -278,14 +284,30 @@
   transform-origin: center center;
 }
 
-.ray-1 { transform: rotate(0deg) translateY(-0.9rem); }
-.ray-2 { transform: rotate(45deg) translateY(-0.9rem); }
-.ray-3 { transform: rotate(90deg) translateY(-0.9rem); }
-.ray-4 { transform: rotate(135deg) translateY(-0.9rem); }
-.ray-5 { transform: rotate(180deg) translateY(-0.9rem); }
-.ray-6 { transform: rotate(225deg) translateY(-0.9rem); }
-.ray-7 { transform: rotate(270deg) translateY(-0.9rem); }
-.ray-8 { transform: rotate(315deg) translateY(-0.9rem); }
+.ray-1 {
+  transform: rotate(0deg) translateY(-0.9rem);
+}
+.ray-2 {
+  transform: rotate(45deg) translateY(-0.9rem);
+}
+.ray-3 {
+  transform: rotate(90deg) translateY(-0.9rem);
+}
+.ray-4 {
+  transform: rotate(135deg) translateY(-0.9rem);
+}
+.ray-5 {
+  transform: rotate(180deg) translateY(-0.9rem);
+}
+.ray-6 {
+  transform: rotate(225deg) translateY(-0.9rem);
+}
+.ray-7 {
+  transform: rotate(270deg) translateY(-0.9rem);
+}
+.ray-8 {
+  transform: rotate(315deg) translateY(-0.9rem);
+}
 
 .site-nav {
   display: flex;
@@ -373,7 +395,7 @@
 .header-cta::after,
 .button-outline::after,
 .button-solid::after {
-  content: "\2197";
+  content: '\2197';
   margin-left: 0.25rem;
   transition:
     color 220ms ease,

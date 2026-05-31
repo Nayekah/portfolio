@@ -375,12 +375,22 @@
 
 .stack-fade-left {
   left: 0;
-  background: linear-gradient(90deg, var(--paper) 0%, var(--paper-fade) 42%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--paper) 0%,
+    var(--paper-fade) 42%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 .stack-fade-right {
   right: 0;
-  background: linear-gradient(270deg, var(--paper) 0%, var(--paper-fade) 42%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(
+    270deg,
+    var(--paper) 0%,
+    var(--paper-fade) 42%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 .stack-item {
@@ -716,7 +726,9 @@
   cursor: pointer;
   background: var(--line);
   appearance: none;
-  transition: background-color 180ms ease, transform 180ms ease;
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease;
 }
 
 .award-tabs button:hover,
@@ -823,14 +835,33 @@
   margin-bottom: 1rem;
 }
 
-.tone-mint { background: var(--tone-mint); }
-.tone-sand { background: var(--tone-sand); }
-.tone-blue { background: var(--tone-blue); }
-.tone-olive { background: var(--tone-olive); color: var(--paper); }
-.tone-ink { background: var(--tone-ink); color: var(--paper); }
-.tone-dark { background: var(--tone-dark); color: var(--paper); }
-.tone-paper { background: var(--tone-paper); }
-.tone-light { background: var(--tone-light); }
+.tone-mint {
+  background: var(--tone-mint);
+}
+.tone-sand {
+  background: var(--tone-sand);
+}
+.tone-blue {
+  background: var(--tone-blue);
+}
+.tone-olive {
+  background: var(--tone-olive);
+  color: var(--paper);
+}
+.tone-ink {
+  background: var(--tone-ink);
+  color: var(--paper);
+}
+.tone-dark {
+  background: var(--tone-dark);
+  color: var(--paper);
+}
+.tone-paper {
+  background: var(--tone-paper);
+}
+.tone-light {
+  background: var(--tone-light);
+}
 
 .value-card.tone-olive p,
 .value-card.tone-ink p,
@@ -888,7 +919,7 @@
 }
 
 .specialization-item::after {
-  content: "\2197";
+  content: '\2197';
   color: var(--ink);
 }
 
@@ -1114,4 +1145,3 @@
   width: 1.15rem;
   height: 1.15rem;
 }
-

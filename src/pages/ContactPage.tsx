@@ -176,7 +176,11 @@ function TypedContactTitle({ className }: { className: string }) {
         )}
       </span>
       <span className="typing-line">
-        {renderTypedLine(contactTypingLine2, visibleLine2Chars, !shouldReduceMotion && phase === 'line2')}
+        {renderTypedLine(
+          contactTypingLine2,
+          visibleLine2Chars,
+          !shouldReduceMotion && phase === 'line2'
+        )}
       </span>
     </h1>
   )

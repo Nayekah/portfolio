@@ -81,8 +81,7 @@ function setJsonLd(payload?: JsonLdNode | JsonLdNode[]) {
     return
   }
 
-  const script =
-    existing instanceof HTMLScriptElement ? existing : document.createElement('script')
+  const script = existing instanceof HTMLScriptElement ? existing : document.createElement('script')
 
   script.id = scriptId
   script.type = 'application/ld+json'

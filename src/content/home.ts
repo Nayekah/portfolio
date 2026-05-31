@@ -96,12 +96,7 @@ const valueCards: ValueCard[] = [
 ]
 
 const specializations = [
-  [
-    'Low-level Programming',
-    'System Design',
-    'Backend Development',
-    'Front-end Development',
-  ],
+  ['Low-level Programming', 'System Design', 'Backend Development', 'Front-end Development'],
   ['Blockchain Development', 'Cybersecurity', 'Research and Development', 'Cryptography'],
   ['Binary Exploitation', 'Machine Learning', 'Interaction Design', 'Deep Learning'],
 ]

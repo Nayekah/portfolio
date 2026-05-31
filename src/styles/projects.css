@@ -54,12 +54,14 @@
   gap: 0.35rem;
   color: var(--muted);
   text-decoration: none;
-  transition: color 180ms ease, transform 180ms ease;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
 }
 
 .projects-page-back-home a::before,
 .page-back-home a::before {
-  content: "\2190";
+  content: '\2190';
   font-size: 0.95em;
 }
 
@@ -70,4 +72,3 @@
   color: var(--ink);
   transform: translateX(-1px);
 }
-

@@ -64,7 +64,11 @@ function TechStackCarousel() {
       <div className="stack-fade stack-fade-left" aria-hidden="true"></div>
       <div className="stack-fade stack-fade-right" aria-hidden="true"></div>
 
-      <motion.div className="stack-track" ref={trackRef} style={shouldReduceMotion ? undefined : { x }}>
+      <motion.div
+        className="stack-track"
+        ref={trackRef}
+        style={shouldReduceMotion ? undefined : { x }}
+      >
         {[...logoItems, ...logoItems].map((item, index) => {
           const isDuplicate = index >= logoItems.length
 

@@ -1,5 +1,11 @@
 import type { PointerEvent as ReactPointerEvent } from 'react'
-import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring } from 'motion/react'
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+} from 'motion/react'
 import { heroProfileLinks } from '../../content/home'
 
 function CryptoHackMark() {
@@ -31,13 +37,7 @@ function CryptoHackMark() {
         strokeLinejoin="round"
         strokeWidth="1.6"
       />
-      <path
-        d="M12 8v9"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="1.6"
-      />
+      <path d="M12 8v9" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.6" />
       <path
         d="M10 10.2c.5.2.8.6.8 1.1 0 .5-.3.9-.8 1.1.5.2.8.6.8 1.1 0 .5-.3.9-.8 1.1M14 10.2c-.5.2-.8.6-.8 1.1 0 .5.3.9.8 1.1-.5.2-.8.6-.8 1.1 0 .5.3.9.8 1.1"
         fill="none"
@@ -95,11 +95,19 @@ function HeroPolaroid() {
         onPointerMove={handlePointerMove}
         onPointerLeave={resetTilt}
       >
-        <motion.div className="hero-profile-card hero-polaroid" initial={false} style={{ transform }}>
+        <motion.div
+          className="hero-profile-card hero-polaroid"
+          initial={false}
+          style={{ transform }}
+        >
           <span className="hero-polaroid-shadow" aria-hidden="true"></span>
 
           <div className="hero-polaroid-frame">
-            <img className="hero-profile-image" src="/profile.jpeg" alt="Nayaka Ghana Subrata portrait" />
+            <img
+              className="hero-profile-image"
+              src="/profile.jpeg"
+              alt="Nayaka Ghana Subrata portrait"
+            />
           </div>
 
           <div className="hero-profile-meta hero-polaroid-meta">

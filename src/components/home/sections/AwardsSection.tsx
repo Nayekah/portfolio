@@ -49,7 +49,12 @@ function AwardsSection({
         onFocusCapture={() => onAutoplayPauseChange(true)}
         onBlurCapture={handleBlurCapture}
       >
-        <button className="testimonial-nav" type="button" onClick={onPreviousAward} aria-label="Previous award">
+        <button
+          className="testimonial-nav"
+          type="button"
+          onClick={onPreviousAward}
+          aria-label="Previous award"
+        >
           &larr;
         </button>
 
@@ -75,7 +80,12 @@ function AwardsSection({
           </div>
         </motion.div>
 
-        <button className="testimonial-nav" type="button" onClick={onNextAward} aria-label="Next award">
+        <button
+          className="testimonial-nav"
+          type="button"
+          onClick={onNextAward}
+          aria-label="Next award"
+        >
           &rarr;
         </button>
       </RevealBlock>

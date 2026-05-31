@@ -32,7 +32,9 @@ type ContactFormErrors = Partial<
 
 function getFieldError(fieldName: keyof ContactFormErrors, form: HTMLFormElement) {
   if (fieldName === 'services') {
-    const selectedServices = form.querySelectorAll<HTMLInputElement>('input[name="services"]:checked')
+    const selectedServices = form.querySelectorAll<HTMLInputElement>(
+      'input[name="services"]:checked'
+    )
 
     if (selectedServices.length === 0) {
       return 'Select at least one collaboration type.'
@@ -107,9 +109,7 @@ function ContactForm() {
     return nextError
   }
 
-  const handleFieldChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleFieldChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (!submitAttempted && !errors[event.currentTarget.name as keyof ContactFormErrors]) {
       return
     }
@@ -123,9 +123,7 @@ function ContactForm() {
     updateFieldError(event.currentTarget.name as keyof ContactFormErrors, form)
   }
 
-  const handleFieldBlur = (
-    event: FocusEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleFieldBlur = (event: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const form = event.currentTarget.form
 
     if (!form) {
@@ -176,10 +174,9 @@ function ContactForm() {
       event.preventDefault()
       setErrors(nextErrors)
 
-      const firstInvalidField =
-        form.querySelector<HTMLInputElement | HTMLTextAreaElement>(
-          'input[name="name"], input[name="email"], textarea[name="scope"], input[name="references"], input[name="timeline"], input[name="referrer"]'
-        )
+      const firstInvalidField = form.querySelector<HTMLInputElement | HTMLTextAreaElement>(
+        'input[name="name"], input[name="email"], textarea[name="scope"], input[name="references"], input[name="timeline"], input[name="referrer"]'
+      )
 
       if (nextErrors.name) {
         focusNamedField(form, 'name')

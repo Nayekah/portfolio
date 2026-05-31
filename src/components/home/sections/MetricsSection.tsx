@@ -42,7 +42,10 @@ function MetricsSection({
         onBlurCapture={handleBlurCapture}
       >
         <RevealBlock className="metrics-art" delay={0.04}>
-          <div className={`metrics-pattern tone-${currentMetric.tone}`} key={`pattern-${activeMetric}`}>
+          <div
+            className={`metrics-pattern tone-${currentMetric.tone}`}
+            key={`pattern-${activeMetric}`}
+          >
             {metricPatterns[activeMetric].map((cell, index) => {
               const style: MetricCellStyle = {
                 '--cell-opacity': cell.opacity,

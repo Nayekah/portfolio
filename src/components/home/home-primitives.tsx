@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react'
-import type {
-  CSSProperties,
-  FocusEventHandler,
-  MouseEventHandler,
-  ReactNode,
-} from 'react'
+import type { CSSProperties, FocusEventHandler, MouseEventHandler, ReactNode } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import { heroTypingLine1, heroTypingLine2, scrambleGlyphs } from '../../content/home'
 
@@ -234,7 +229,9 @@ export function TypingHeroTitle() {
   const line2Text = `${heroTypingLine2.prefix}${heroTypingLine2.highlight}${heroTypingLine2.suffix}`
   const [line1Chars, setLine1Chars] = useState(shouldReduceMotion ? line1Text.length : 0)
   const [line2Chars, setLine2Chars] = useState(shouldReduceMotion ? line2Text.length : 0)
-  const [phase, setPhase] = useState<'line1' | 'pause' | 'line2'>(shouldReduceMotion ? 'line2' : 'line1')
+  const [phase, setPhase] = useState<'line1' | 'pause' | 'line2'>(
+    shouldReduceMotion ? 'line2' : 'line1'
+  )
 
   useEffect(() => {
     if (shouldReduceMotion) {

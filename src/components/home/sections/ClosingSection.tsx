@@ -9,9 +9,9 @@ function ClosingSection() {
           <div className="closing-panel">
             <h2>Build with clarity.</h2>
             <p>
-              I build software too, not just portfolios. If you need a stronger digital
-              presence, a writing archive, or a product interface that feels sharper and more
-              deliberate, this is where the work can begin to take a clearer shape.
+              I build software too, not just portfolios. If you need a stronger digital presence, a
+              writing archive, or a product interface that feels sharper and more deliberate, this
+              is where the work can begin to take a clearer shape.
             </p>
             <a className="button-solid" href="/contacts">
               Start a conversation

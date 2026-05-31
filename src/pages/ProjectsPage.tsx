@@ -195,9 +195,7 @@ function TypedSectionTitle({ className, line }: { className: string; line: Typed
 
   return (
     <h1 ref={titleRef} className={className} aria-label={fullText}>
-      <span className="typing-line">
-        {renderTypedLine(line, currentChars, showCursor)}
-      </span>
+      <span className="typing-line">{renderTypedLine(line, currentChars, showCursor)}</span>
     </h1>
   )
 }
@@ -218,15 +216,18 @@ function ProjectsPage({ year }: ProjectsPageProps) {
 
         <RevealBlock className="writing-page-hero" amount={0.35}>
           <div>
-            <TypedSectionTitle className="writing-page-title typing-section-title" line={writingTypingLine} />
+            <TypedSectionTitle
+              className="writing-page-title typing-section-title"
+              line={writingTypingLine}
+            />
           </div>
 
           <div className="writing-page-intro">
             <p>
               These papers came out of long hours spent following a question until it became clear
               enough to put on the page. Some began as class assignments, but most of them turned
-              into a way to think more carefully, argue more precisely, and leave behind a record
-              of what the work was trying to understand.
+              into a way to think more carefully, argue more precisely, and leave behind a record of
+              what the work was trying to understand.
             </p>
           </div>
         </RevealBlock>
@@ -271,8 +272,8 @@ function ProjectsPage({ year }: ProjectsPageProps) {
               This archive follows the work as it moved from one obsession to another. Some builds
               came from learning how systems fit together, some from testing ideas in security and
               machine learning, and others from trying to ship complete applications. Seen together,
-              they feel less like isolated projects and more like a running log of how the
-              technical taste kept changing through practice.
+              they feel less like isolated projects and more like a running log of how the technical
+              taste kept changing through practice.
             </p>
           </div>
         </RevealBlock>

@@ -67,8 +67,7 @@
   box-shadow: 0 18px 32px var(--shadow-panel);
   background:
     linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
-    var(--surface-panel-muted);
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px), var(--surface-panel-muted);
   background-size: 2rem 2rem;
 }
 
@@ -108,7 +107,12 @@
 }
 
 .blogs-bulletin-feature-media::after {
-  background: linear-gradient(180deg, transparent 54%, rgba(255, 255, 255, 0.14) 74%, rgba(255, 255, 255, 0.92) 100%);
+  background: linear-gradient(
+    180deg,
+    transparent 54%,
+    rgba(255, 255, 255, 0.14) 74%,
+    rgba(255, 255, 255, 0.92) 100%
+  );
 }
 
 .blogs-bulletin-feature-media figcaption {
@@ -722,11 +726,13 @@
   gap: 0.35rem;
   color: var(--muted);
   text-decoration: none;
-  transition: color 180ms ease, transform 180ms ease;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
 }
 
 .page-back-links a::before {
-  content: "\2190";
+  content: '\2190';
   font-size: 0.95em;
 }
 
@@ -820,4 +826,3 @@
   word-break: normal;
   overflow-wrap: normal;
 }
-

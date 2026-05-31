@@ -7,11 +7,7 @@ function spotifyApiDevPlugin(mode) {
   async function handleSpotifyRequest(server, request, response, endpointFile) {
     const env = loadEnv(mode, server.config.root, '')
 
-    for (const key of [
-      'SPOTIFY_CLIENT_ID',
-      'SPOTIFY_CLIENT_SECRET',
-      'SPOTIFY_REFRESH_TOKEN',
-    ]) {
+    for (const key of ['SPOTIFY_CLIENT_ID', 'SPOTIFY_CLIENT_SECRET', 'SPOTIFY_REFRESH_TOKEN']) {
       if (!process.env[key] && env[key]) {
         process.env[key] = env[key]
       }
@@ -47,12 +43,18 @@ function spotifyApiDevPlugin(mode) {
         {
           path: '/api/spotify/recently-played',
           endpointFile: 'api/spotify/recently-played.ts',
-          fallback: { message: 'Spotify dev middleware failed while handling the request.', track: null },
+          fallback: {
+            message: 'Spotify dev middleware failed while handling the request.',
+            track: null,
+          },
         },
         {
           path: '/api/spotify/top-songs',
           endpointFile: 'api/spotify/top-songs.ts',
-          fallback: { message: 'Spotify dev middleware failed while handling the request.', tracks: [] },
+          fallback: {
+            message: 'Spotify dev middleware failed while handling the request.',
+            tracks: [],
+          },
         },
       ]
 
@@ -71,8 +73,7 @@ function spotifyApiDevPlugin(mode) {
             response.end(
               JSON.stringify({
                 ...route.fallback,
-                message:
-                  error instanceof Error ? error.message : route.fallback.message,
+                message: error instanceof Error ? error.message : route.fallback.message,
               })
             )
           }

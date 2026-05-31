@@ -223,7 +223,9 @@
   font-family: 'Unica77';
   font-size: clamp(1.55rem, 2vw, 2rem);
   line-height: 1.1;
-  transition: color 220ms ease, transform 220ms ease;
+  transition:
+    color 220ms ease,
+    transform 220ms ease;
 }
 
 .miscellaneous-spotify-title svg {
@@ -382,7 +384,9 @@
   width: 0.95rem;
   height: 0.95rem;
   color: var(--muted);
-  transition: transform 220ms ease, color 220ms ease;
+  transition:
+    transform 220ms ease,
+    color 220ms ease;
 }
 
 .miscellaneous-song-item:hover > svg,
@@ -459,4 +463,3 @@
 .miscellaneous-inline-link:focus-visible svg {
   transform: translate(2px, -2px);
 }
-

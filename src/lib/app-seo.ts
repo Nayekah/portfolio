@@ -1,11 +1,7 @@
 import { useEffect } from 'react'
 import { awardTimeline } from '../content/awards'
 import { articleCards } from '../content/blogs'
-import {
-  personName,
-  personProfiles,
-  siteTitlePrefix,
-} from '../content/home'
+import { personName, personProfiles, siteTitlePrefix } from '../content/home'
 import { allProjects, featuredProjects } from '../content/projects'
 import type { AppRoute } from './routes'
 import { applySeo, getSiteUrl } from './seo'

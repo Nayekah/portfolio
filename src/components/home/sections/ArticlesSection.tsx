@@ -24,7 +24,10 @@ function ArticlesSection() {
         {articleCards.map((article) => (
           <StaggerItem key={article.title}>
             {getArticleHref(article) ? (
-              <a className="article-card article-card-link" href={getArticleHref(article) ?? undefined}>
+              <a
+                className="article-card article-card-link"
+                href={getArticleHref(article) ?? undefined}
+              >
                 <div
                   className={`article-cover tone-${article.tone}${
                     article.coverImage ? ' article-cover-with-image' : ''

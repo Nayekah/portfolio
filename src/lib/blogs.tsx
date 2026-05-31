@@ -46,7 +46,7 @@ export function renderInlineMarkdown(text: string) {
               <FiGithub />
             </span>
             <span className="blog-inline-badge-label">{badgeMatch[1]}</span>
-          </a>,
+          </a>
         )
       }
     } else if (token.startsWith('[![')) {
@@ -60,8 +60,12 @@ export function renderInlineMarkdown(text: string) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img className="blog-inline-image" src={linkedImageMatch[2]} alt={linkedImageMatch[1]} />
-          </a>,
+            <img
+              className="blog-inline-image"
+              src={linkedImageMatch[2]}
+              alt={linkedImageMatch[1]}
+            />
+          </a>
         )
       }
     } else if (token.startsWith('![')) {
@@ -73,7 +77,7 @@ export function renderInlineMarkdown(text: string) {
             src={imageMatch[2]}
             alt={imageMatch[1]}
             key={`${index}-image`}
-          />,
+          />
         )
       }
     } else if (token.startsWith('$$') && token.endsWith('$$')) {
@@ -88,7 +92,7 @@ export function renderInlineMarkdown(text: string) {
           className="blog-inline-equation"
           dangerouslySetInnerHTML={{ __html: html }}
           key={`${index}-inline-display-math`}
-        />,
+        />
       )
     } else if (token.startsWith('$') && token.endsWith('$')) {
       const expression = token.slice(1, -1).trim()
@@ -102,7 +106,7 @@ export function renderInlineMarkdown(text: string) {
           className="blog-inline-equation"
           dangerouslySetInnerHTML={{ __html: html }}
           key={`${index}-inline-math`}
-        />,
+        />
       )
     } else if (token.startsWith('**') && token.endsWith('**')) {
       nodes.push(<strong key={`${index}-strong`}>{token.slice(2, -2)}</strong>)
@@ -112,14 +116,9 @@ export function renderInlineMarkdown(text: string) {
       const linkMatch = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/)
       if (linkMatch) {
         nodes.push(
-          <a
-            key={`${index}-link`}
-            href={linkMatch[2]}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a key={`${index}-link`} href={linkMatch[2]} target="_blank" rel="noopener noreferrer">
             {linkMatch[1]}
-          </a>,
+          </a>
         )
       }
     }

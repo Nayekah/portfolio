@@ -44,7 +44,9 @@
 .writing-table-head,
 .writing-row {
   display: grid;
-  grid-template-columns: minmax(150px, 0.9fr) minmax(260px, 1.8fr) minmax(320px, 2fr) minmax(220px, 1.15fr) auto;
+  grid-template-columns:
+    minmax(150px, 0.9fr) minmax(260px, 1.8fr) minmax(320px, 2fr) minmax(220px, 1.15fr)
+    auto;
   gap: 1rem;
   align-items: start;
 }
@@ -100,7 +102,9 @@
   gap: 0.35rem;
   color: var(--muted);
   text-decoration: none;
-  transition: color 180ms ease, transform 180ms ease;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
 }
 
 .writing-link a:hover,
@@ -123,4 +127,3 @@
   opacity: 1;
   border-bottom-color: var(--ink);
 }
-

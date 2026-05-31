@@ -1,7 +1,7 @@
 import {
+  REQUIRED_ENV_VARS,
   getUserAccessToken,
   mapSpotifyTrack,
-  REQUIRED_ENV_VARS,
   type ApiJsonResponse,
   type SpotifyTrack,
   type SpotifyTrackPreview,
@@ -11,7 +11,8 @@ const SPOTIFY_CACHE_KEY = '__nayak4SpotifyRecentlyPlayedCache' as const
 const SPOTIFY_CACHE_TTL_MS = 120_000
 const SPOTIFY_MIN_RETRY_AFTER_MS = 30_000
 const SPOTIFY_EMPTY_MESSAGE = 'No recently played track is available right now.'
-const SPOTIFY_STALE_MESSAGE = 'Showing the last available track while Spotify is temporarily rate limited.'
+const SPOTIFY_STALE_MESSAGE =
+  'Showing the last available track while Spotify is temporarily rate limited.'
 const SPOTIFY_STALE_UNAVAILABLE_MESSAGE =
   'Showing the last available track while Spotify is temporarily unavailable.'
 const SPOTIFY_UNAVAILABLE_MESSAGE = 'Spotify listening data is temporarily unavailable.'
@@ -99,7 +100,11 @@ export default async function handler(
   }
 
   if (cache.hasSnapshot && now - cache.fetchedAt < SPOTIFY_CACHE_TTL_MS) {
-    return respondWithCachedSnapshot(response, cache, cache.track ? undefined : SPOTIFY_EMPTY_MESSAGE)
+    return respondWithCachedSnapshot(
+      response,
+      cache,
+      cache.track ? undefined : SPOTIFY_EMPTY_MESSAGE
+    )
   }
 
   if (cache.track && now < cache.nextAllowedFetchAt) {
@@ -134,7 +139,9 @@ export default async function handler(
         }
       }
 
-      throw new Error(`Spotify recently played request failed with status ${spotifyResponse.status}`)
+      throw new Error(
+        `Spotify recently played request failed with status ${spotifyResponse.status}`
+      )
     }
 
     const payload = (await spotifyResponse.json()) as RecentlyPlayedSpotifyPayload

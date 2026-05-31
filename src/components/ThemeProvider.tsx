@@ -1,9 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useState,
-  type ReactNode,
-} from 'react'
+import { useCallback, useEffect, useState, type ReactNode } from 'react'
 import { flushSync } from 'react-dom'
 import { useReducedMotion } from 'motion/react'
 import { ThemeContext, type Theme, type ThemeOrigin } from './theme'
@@ -63,69 +58,72 @@ function ThemeProvider({ children }: ThemeProviderProps) {
     }
   }, [theme])
 
-  const toggleTheme = useCallback((origin?: ThemeOrigin) => {
-    if (isTransitioning) {
-      return
-    }
+  const toggleTheme = useCallback(
+    (origin?: ThemeOrigin) => {
+      if (isTransitioning) {
+        return
+      }
 
-    const nextTheme = theme === 'light' ? 'dark' : 'light'
-    const root = document.documentElement
-    const documentWithTransition = document as Document & {
-      startViewTransition?: (updateCallback: () => void | Promise<void>) => ViewTransition
-    }
+      const nextTheme = theme === 'light' ? 'dark' : 'light'
+      const root = document.documentElement
+      const documentWithTransition = document as Document & {
+        startViewTransition?: (updateCallback: () => void | Promise<void>) => ViewTransition
+      }
 
-    if (shouldReduceMotion || !origin || !documentWithTransition.startViewTransition) {
-      setTheme(nextTheme)
-      return
-    }
-
-    const endRadius = Math.ceil(getRippleRadius(origin))
-
-    root.style.setProperty('--theme-transition-x', `${origin.x}px`)
-    root.style.setProperty('--theme-transition-y', `${origin.y}px`)
-    root.style.setProperty('--theme-transition-radius', `${endRadius}px`)
-    root.classList.add('theme-transitioning')
-    setIsTransitioning(true)
-
-    const transition = documentWithTransition.startViewTransition(() => {
-      flushSync(() => {
+      if (shouldReduceMotion || !origin || !documentWithTransition.startViewTransition) {
         setTheme(nextTheme)
-      })
-    })
+        return
+      }
 
-    transition.ready
-      .then(() => {
-        document.documentElement.animate(
-          {
-            clipPath: [
-              `circle(0px at ${origin.x}px ${origin.y}px)`,
-              `circle(${endRadius}px at ${origin.x}px ${origin.y}px)`,
-            ],
-          },
-          {
-            duration: THEME_TRANSITION_DURATION_MS,
-            easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-            fill: 'both',
-            pseudoElement: '::view-transition-new(root)',
-          }
-        )
+      const endRadius = Math.ceil(getRippleRadius(origin))
+
+      root.style.setProperty('--theme-transition-x', `${origin.x}px`)
+      root.style.setProperty('--theme-transition-y', `${origin.y}px`)
+      root.style.setProperty('--theme-transition-radius', `${endRadius}px`)
+      root.classList.add('theme-transitioning')
+      setIsTransitioning(true)
+
+      const transition = documentWithTransition.startViewTransition(() => {
+        flushSync(() => {
+          setTheme(nextTheme)
+        })
       })
-      .catch(() => {
+
+      transition.ready
+        .then(() => {
+          document.documentElement.animate(
+            {
+              clipPath: [
+                `circle(0px at ${origin.x}px ${origin.y}px)`,
+                `circle(${endRadius}px at ${origin.x}px ${origin.y}px)`,
+              ],
+            },
+            {
+              duration: THEME_TRANSITION_DURATION_MS,
+              easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+              fill: 'both',
+              pseudoElement: '::view-transition-new(root)',
+            }
+          )
+        })
+        .catch(() => {
+          root.classList.remove('theme-transitioning')
+          root.style.removeProperty('--theme-transition-x')
+          root.style.removeProperty('--theme-transition-y')
+          root.style.removeProperty('--theme-transition-radius')
+          setIsTransitioning(false)
+        })
+
+      transition.finished.finally(() => {
         root.classList.remove('theme-transitioning')
         root.style.removeProperty('--theme-transition-x')
         root.style.removeProperty('--theme-transition-y')
         root.style.removeProperty('--theme-transition-radius')
         setIsTransitioning(false)
       })
-
-    transition.finished.finally(() => {
-      root.classList.remove('theme-transitioning')
-      root.style.removeProperty('--theme-transition-x')
-      root.style.removeProperty('--theme-transition-y')
-      root.style.removeProperty('--theme-transition-radius')
-      setIsTransitioning(false)
-    })
-  }, [isTransitioning, shouldReduceMotion, theme])
+    },
+    [isTransitioning, shouldReduceMotion, theme]
+  )
 
   return (
     <ThemeContext.Provider

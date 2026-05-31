@@ -63,17 +63,13 @@ function wrapCodeLine(line: string, maxColumns: number) {
     const wrapPoint = findWrapPoint(remaining, currentLimit)
     const segment = remaining.slice(0, wrapPoint).trimEnd()
 
-    wrappedLines.push(
-      `${wrappedLines.length === 0 ? baseIndent : continuationIndent}${segment}`
-    )
+    wrappedLines.push(`${wrappedLines.length === 0 ? baseIndent : continuationIndent}${segment}`)
 
     remaining = remaining.slice(wrapPoint).trimStart()
     currentLimit = Math.max(12, maxColumns - continuationIndent.length)
   }
 
-  wrappedLines.push(
-    `${wrappedLines.length === 0 ? baseIndent : continuationIndent}${remaining}`
-  )
+  wrappedLines.push(`${wrappedLines.length === 0 ? baseIndent : continuationIndent}${remaining}`)
 
   return wrappedLines.join('\n')
 }

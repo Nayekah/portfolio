@@ -281,7 +281,10 @@ function BlogsPage({ year }: BlogsPageProps) {
   const [expandedCounts, setExpandedCounts] = useState<Record<string, number>>({})
 
   const sortedArticles = useMemo(
-    () => [...articleCards].sort((left, right) => getArticleTimestamp(right) - getArticleTimestamp(left)),
+    () =>
+      [...articleCards].sort(
+        (left, right) => getArticleTimestamp(right) - getArticleTimestamp(left)
+      ),
     []
   )
 
@@ -289,7 +292,9 @@ function BlogsPage({ year }: BlogsPageProps) {
   const defaultBulletinTitle = bulletinArticles[0]?.title ?? ''
   const [activeBulletinTitle, setActiveBulletinTitle] = useState(defaultBulletinTitle)
   const activeBulletin =
-    bulletinArticles.find((article) => article.title === activeBulletinTitle) ?? bulletinArticles[0] ?? null
+    bulletinArticles.find((article) => article.title === activeBulletinTitle) ??
+    bulletinArticles[0] ??
+    null
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -343,7 +348,10 @@ function BlogsPage({ year }: BlogsPageProps) {
 
         <RevealBlock className="blogs-page-hero" amount={0.35}>
           <div className="blogs-page-headline">
-            <TypedSectionTitle className="blogs-page-title typing-section-title" line={blogsTypingLine} />
+            <TypedSectionTitle
+              className="blogs-page-title typing-section-title"
+              line={blogsTypingLine}
+            />
           </div>
 
           <div className="blogs-page-intro">
@@ -372,9 +380,15 @@ function BlogsPage({ year }: BlogsPageProps) {
                 <article className="blogs-bulletin-feature" aria-label={activeBulletin.title}>
                   <figure className="blogs-bulletin-feature-media">
                     {activeBulletin.coverImage ? (
-                      <img src={activeBulletin.coverImage} alt={activeBulletin.coverAlt ?? ''} loading="lazy" />
+                      <img
+                        src={activeBulletin.coverImage}
+                        alt={activeBulletin.coverAlt ?? ''}
+                        loading="lazy"
+                      />
                     ) : (
-                      <div className={`blogs-bulletin-feature-fallback tone-${activeBulletin.tone}`}></div>
+                      <div
+                        className={`blogs-bulletin-feature-fallback tone-${activeBulletin.tone}`}
+                      ></div>
                     )}
                     <figcaption>{getBulletinCaption(activeBulletin)}</figcaption>
                   </figure>

@@ -321,9 +321,7 @@ function AwardsPage({ year }: AwardsPageProps) {
               }}
             >
               <motion.figure
-                className={`awards-floating-polaroid${
-                  isPreviewHighlighted ? ' is-colorized' : ''
-                }`}
+                className={`awards-floating-polaroid${isPreviewHighlighted ? ' is-colorized' : ''}`}
                 initial={shouldReduceMotion ? false : { opacity: 0, x: 24, rotate: 3 }}
                 whileInView={shouldReduceMotion ? undefined : { opacity: 1, x: 0, rotate: -4 }}
                 viewport={{ once: true, amount: 0.3 }}

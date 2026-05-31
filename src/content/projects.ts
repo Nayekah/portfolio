@@ -83,7 +83,14 @@ const sideProjects: ProjectEntry[] = [
       'This project was built to understand neural networks below the convenience layer of high-level frameworks. Instead of treating training as a black box, it focuses on implementing the mechanics directly: weight initialization, forward propagation, backpropagation, and parameter updates.',
     buildNotes:
       'The codebase implements a scikit-learn-like FFNN architecture in Python without relying on high-level deep learning libraries. It includes configurable layer sizes, activation and loss choices, gradient descent optimization, model save/load flows, test coverage, and experiments comparing architectural and hyperparameter choices against reference behavior from scikit-learn models.',
-    stack: ['Python', 'NumPy', 'PyTest', 'Gradient Descent', 'Backpropagation', 'scikit-learn Comparison'],
+    stack: [
+      'Python',
+      'NumPy',
+      'PyTest',
+      'Gradient Descent',
+      'Backpropagation',
+      'scikit-learn Comparison',
+    ],
     href: 'https://github.com/Nayekah/Feed-Forward-Neural-Network',
     image: '/projects/ffnn.webp',
     imageAlt: 'Preview image for the Feed-Forward Neural Network from scratch project.',
@@ -134,7 +141,14 @@ const sideProjects: ProjectEntry[] = [
       'The Recruiter was built as an algorithm-focused application rather than a generic HR dashboard. Its main purpose is to process uploaded CVs, convert them into analyzable text, and help recruitment-style filtering through string matching and structured extraction.',
     buildNotes:
       'The system uses multiple exact string-matching algorithms including Knuth-Morris-Pratt, Boyer-Moore, and Aho-Corasick, then falls back to Levenshtein-based fuzzy matching when exact hits are absent. It also uses regex extraction for CV sections and applicant summaries, with the application managed in Python, containerized with Docker Compose, and configured through a uv-based environment.',
-    stack: ['Python', 'KMP', 'Boyer-Moore', 'Aho-Corasick', 'Levenshtein Distance', 'Docker Compose'],
+    stack: [
+      'Python',
+      'KMP',
+      'Boyer-Moore',
+      'Aho-Corasick',
+      'Levenshtein Distance',
+      'Docker Compose',
+    ],
     href: 'https://github.com/Nayekah/Tubes3_TheRecruiter',
     image: '/projects/TheRecruiterBanner.png',
     imageAlt: 'Banner image for The Recruiter applicant tracking system project.',

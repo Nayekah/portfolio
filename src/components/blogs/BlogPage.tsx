@@ -145,21 +145,31 @@ function BlogPage({ entry, year }: BlogPageProps) {
             <div className="blog-title-divider" aria-hidden="true"></div>
             <h1 className="blog-page-title">{entry.title}</h1>
             {entry.summary ? <p className="blog-page-summary">{entry.summary}</p> : null}
-            {!entry.summary ? <div className="blog-summary-divider" aria-hidden="true"></div> : null}
+            {!entry.summary ? (
+              <div className="blog-summary-divider" aria-hidden="true"></div>
+            ) : null}
 
             <div className="blog-content">
               {blocks.map((block, blockIndex) => {
                 if (block.type === 'heading') {
                   if (block.depth === 2) {
                     return (
-                      <h2 id={block.id} className="blog-section-title" key={`${block.id}-${blockIndex}`}>
+                      <h2
+                        id={block.id}
+                        className="blog-section-title"
+                        key={`${block.id}-${blockIndex}`}
+                      >
                         {block.text}
                       </h2>
                     )
                   }
 
                   return (
-                    <h3 id={block.id} className="blog-subsection-title" key={`${block.id}-${blockIndex}`}>
+                    <h3
+                      id={block.id}
+                      className="blog-subsection-title"
+                      key={`${block.id}-${blockIndex}`}
+                    >
                       {block.text}
                     </h3>
                   )
@@ -186,14 +196,24 @@ function BlogPage({ entry, year }: BlogPageProps) {
                 if (block.type === 'figure') {
                   return (
                     <figure className="blog-figure" key={`figure-${blockIndex}`}>
-                      <img className="blog-figure-image" src={resolveAsset(block.src)} alt={block.alt} />
+                      <img
+                        className="blog-figure-image"
+                        src={resolveAsset(block.src)}
+                        alt={block.alt}
+                      />
                       {block.caption ? <figcaption>{block.caption}</figcaption> : null}
                     </figure>
                   )
                 }
 
                 if (block.type === 'code') {
-                  return <BlogCodeBlock code={block.code} key={`code-${blockIndex}`} language={block.lang} />
+                  return (
+                    <BlogCodeBlock
+                      code={block.code}
+                      key={`code-${blockIndex}`}
+                      language={block.lang}
+                    />
+                  )
                 }
 
                 if (block.type === 'list') {
@@ -223,7 +243,10 @@ function BlogPage({ entry, year }: BlogPageProps) {
             {previousEntry || nextEntry ? (
               <nav className="blog-post-nav" aria-label="Post navigation">
                 {previousEntry ? (
-                  <a className="blog-post-nav-card is-previous" href={`/blogs/${previousEntry.slug}`}>
+                  <a
+                    className="blog-post-nav-card is-previous"
+                    href={`/blogs/${previousEntry.slug}`}
+                  >
                     <span className="blog-post-nav-label">Newer Post</span>
                     <strong>{previousEntry.title}</strong>
                   </a>

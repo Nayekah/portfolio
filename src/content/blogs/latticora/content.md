@@ -725,10 +725,10 @@ if __name__ == "__main__":
 
 From that output we get:
 
-* the encapsulation key `ek`,
-* the ciphertext `c`,
-* the encrypted flag `enc_flag`,
-* and 900 public linear equations in `em`.
+- the encapsulation key `ek`,
+- the ciphertext `c`,
+- the encrypted flag `enc_flag`,
+- and 900 public linear equations in `em`.
 
 The key observation is that the challenge leaks linear relations over the ML-KEM error vector `e`. Since the parameters are `K = 2` and `N = 256`, both the secret and error vectors live in dimension:
 
@@ -738,15 +738,15 @@ $$
 
 That means the challenge is effectively handing us a sparse 900-by-512 linear system over the hidden error vector.
 
-***
+---
 
 ### Recovering the Error Vector From Public Leakage
 
 Each tuple inside `em` contains:
 
-* three indices,
-* three small coefficients,
-* one resulting sum.
+- three indices,
+- three small coefficients,
+- one resulting sum.
 
 So every row gives an equation of the form
 
@@ -762,9 +762,9 @@ $$
 
 where:
 
-* $A_{\text{leak}} \in \mathbb{Z}^{900 \times 512}$,
-* $E \in \mathbb{Z}^{512}$ is the unknown centered error vector,
-* $b_{\text{leak}} \in \mathbb{Z}^{900}$ is public.
+- $A_{\text{leak}} \in \mathbb{Z}^{900 \times 512}$,
+- $E \in \mathbb{Z}^{512}$ is the unknown centered error vector,
+- $b_{\text{leak}} \in \mathbb{Z}^{900}$ is public.
 
 At first glance that looks enough to solve for all 512 coordinates directly. The catch is that the indices are sampled randomly. Some coordinates may never appear at all, which means some columns of $A_{\text{leak}}$ are completely zero. If we keep those columns in the matrix, the system is singular and the direct solve becomes annoying.
 
@@ -803,8 +803,8 @@ $$
 
 So the first useful step is to split the column indices into:
 
-* `keep`: columns that appear at least once,
-* `drop`: columns that are zero everywhere.
+- `keep`: columns that appear at least once,
+- `drop`: columns that are zero everywhere.
 
 Then we amputate the empty columns and solve the reduced system
 
@@ -845,7 +845,7 @@ In Sage, this reduced system can be solved directly with `solve_right()`. That r
 
 So at this stage, we do not know the full error vector yet, but we know almost all of it.
 
-***
+---
 
 ### Reframing the Public Key as an LWE Instance
 
@@ -863,11 +863,11 @@ $$
 
 where:
 
-* $A$ is public,
-* $\vec T$ is the public target vector,
-* $\vec S$ is the unknown secret vector,
-* $\vec E$ is the same error vector,
-* $Q = 3329$.
+- $A$ is public,
+- $\vec T$ is the public target vector,
+- $\vec S$ is the unknown secret vector,
+- $\vec E$ is the same error vector,
+- $Q = 3329$.
 
 Rearranging gives
 
@@ -916,7 +916,7 @@ e_{511}
 \pmod{Q}
 $$
 
-***
+---
 
 ### Filling the Missing Coordinates
 
@@ -942,7 +942,7 @@ This is the trick that keeps the search fast. We are not solving the LWE system 
 
 Once the correct missing error values are inserted, the target lands in the image of the matrix and the solve returns the correct secret vector. We can then validate it by checking that every centered coefficient is still inside the expected small range.
 
-***
+---
 
 ### Recovering the Decapsulation Key and Plaintext
 
@@ -976,7 +976,7 @@ $$
 
 At that point the challenge is done.
 
-***
+---
 
 ### Full Solve Script
 

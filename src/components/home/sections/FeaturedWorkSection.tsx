@@ -10,8 +10,8 @@ function FeaturedWorkSection() {
         <RevealBlock className="featured-work-copy">
           <h2>Selected projects.</h2>
           <p>
-            Two builds that reflect what I spend most of my time on: Convo, a secure messaging
-            app, and Keossku Band, a custom operating system built close to the hardware.
+            Two builds that reflect what I spend most of my time on: Convo, a secure messaging app,
+            and Keossku Band, a custom operating system built close to the hardware.
           </p>
           <a className="button-outline" href="/projects">
             Explore the projects

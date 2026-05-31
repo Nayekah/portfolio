@@ -29,9 +29,9 @@ function decodeHtmlEntities(value: string): string {
 }
 
 function parseTrackSummaryFromPage(html: string, href: string): SpotifyTrackPreview {
-  const rawTitle = html.match(/<meta property="og:title" content="([^"]+)"/i)?.[1] ?? 'Unknown track'
-  const image =
-    html.match(/<meta property="og:image" content="([^"]+)"/i)?.[1] ?? null
+  const rawTitle =
+    html.match(/<meta property="og:title" content="([^"]+)"/i)?.[1] ?? 'Unknown track'
+  const image = html.match(/<meta property="og:image" content="([^"]+)"/i)?.[1] ?? null
   const rawDescription =
     html.match(/<meta property="og:description" content="([^"]+)"/i)?.[1] ??
     html.match(/<meta name="twitter:description" content="([^"]+)"/i)?.[1] ??
@@ -39,8 +39,8 @@ function parseTrackSummaryFromPage(html: string, href: string): SpotifyTrackPrev
 
   const title = decodeHtmlEntities(rawTitle)
   const description = decodeHtmlEntities(rawDescription)
-  const artistFromSongPattern = description.match(/Song\s+[Â·-]\s+(.+?)\s+[Â·-]\s+\d{4}$/i)?.[1]
-  const artistFromOgPattern = description.split(' Â· ')[0]?.trim()
+  const artistFromSongPattern = description.match(/Song\s+[Ã‚Â·-]\s+(.+?)\s+[Ã‚Â·-]\s+\d{4}$/i)?.[1]
+  const artistFromOgPattern = description.split(' Ã‚Â· ')[0]?.trim()
   const year = description.match(/(\d{4})$/)?.[1] ?? 'Spotify track'
 
   return {
