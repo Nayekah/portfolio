@@ -40,7 +40,7 @@ export function renderInlineMarkdown(text: string) {
             href={badgeMatch[2]}
             key={`${index}-github-badge`}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <span className="blog-inline-badge-icon" aria-hidden="true">
               <FiGithub />
@@ -58,7 +58,7 @@ export function renderInlineMarkdown(text: string) {
             href={linkedImageMatch[3]}
             key={`${index}-linked-image`}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <img className="blog-inline-image" src={linkedImageMatch[2]} alt={linkedImageMatch[1]} />
           </a>,
@@ -112,7 +112,12 @@ export function renderInlineMarkdown(text: string) {
       const linkMatch = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/)
       if (linkMatch) {
         nodes.push(
-          <a key={`${index}-link`} href={linkMatch[2]} target="_blank" rel="noreferrer">
+          <a
+            key={`${index}-link`}
+            href={linkMatch[2]}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {linkMatch[1]}
           </a>,
         )

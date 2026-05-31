@@ -75,7 +75,7 @@ function SocialOverlay() {
               href={link.href}
               aria-label={link.label}
               target={link.href.startsWith('mailto:') ? undefined : '_blank'}
-              rel={link.href.startsWith('mailto:') ? undefined : 'noreferrer'}
+              rel={link.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
               title={link.label}
             >
               <Icon aria-hidden="true" />

@@ -248,7 +248,7 @@ function ProjectsPage({ year }: ProjectsPageProps) {
                 <div className="writing-cell writing-summary">{entry.summary}</div>
                 <div className="writing-cell writing-course">{entry.course}</div>
                 <div className="writing-cell writing-link">
-                  <a href={entry.href} target="_blank" rel="noreferrer">
+                  <a href={entry.href} target="_blank" rel="noopener noreferrer">
                     Read
                     <FiArrowUpRight aria-hidden="true" />
                   </a>
@@ -326,7 +326,7 @@ function ProjectsPage({ year }: ProjectsPageProps) {
                       className="project-case-inline-link"
                       href={project.href}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                     >
                       Open on GitHub
                       <FiArrowUpRight aria-hidden="true" />
@@ -343,7 +343,7 @@ function ProjectsPage({ year }: ProjectsPageProps) {
             className="button-outline"
             href="https://github.com/Nayekah?tab=repositories"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             See all projects
           </a>

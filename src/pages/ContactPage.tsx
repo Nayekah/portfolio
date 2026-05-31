@@ -245,7 +245,7 @@ function ContactPage({ year }: ContactPageProps) {
                     key={channel.label}
                     aria-label={channel.label}
                     target={channel.href.startsWith('mailto:') ? undefined : '_blank'}
-                    rel={channel.href.startsWith('mailto:') ? undefined : 'noreferrer'}
+                    rel={channel.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
                     title={channel.label}
                   >
                     <Icon aria-hidden="true" />

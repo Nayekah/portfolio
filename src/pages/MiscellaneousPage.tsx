@@ -476,7 +476,7 @@ function MiscellaneousPage({ year }: MiscellaneousPageProps) {
                       className="miscellaneous-spotify-title"
                       href={track.href}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                     >
                       {track.title}
                       <FiArrowUpRight aria-hidden="true" />
@@ -529,7 +529,7 @@ function MiscellaneousPage({ year }: MiscellaneousPageProps) {
                     className="miscellaneous-song-item"
                     href={movie.href}
                     key={movie.title}
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     target="_blank"
                   >
                     <span className="miscellaneous-song-rank">0{index + 1}</span>
@@ -561,7 +561,7 @@ function MiscellaneousPage({ year }: MiscellaneousPageProps) {
                       className="miscellaneous-song-item"
                       href={song.href}
                       key={`${song.href}-${index}`}
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       target="_blank"
                     >
                       <span className="miscellaneous-song-rank">0{index + 1}</span>
@@ -603,7 +603,7 @@ function MiscellaneousPage({ year }: MiscellaneousPageProps) {
                     className="miscellaneous-song-item"
                     href={book.href}
                     key={book.title}
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     target="_blank"
                   >
                     <span className="miscellaneous-song-rank">0{index + 1}</span>

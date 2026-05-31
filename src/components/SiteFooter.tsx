@@ -18,7 +18,7 @@ function SiteFooter({ isHomePage, year }: SiteFooterProps) {
                 key={link.label}
                 href={resolveInternalHref(link.href, isHomePage)}
                 target={link.external ? '_blank' : undefined}
-                rel={link.external ? 'noreferrer' : undefined}
+                rel={link.external ? 'noopener noreferrer' : undefined}
               >
                 {link.label}
               </a>

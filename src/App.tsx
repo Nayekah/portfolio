@@ -13,12 +13,13 @@ import {
   useSpring,
 } from 'motion/react'
 import './App.css'
-import { featuredAwards } from './content/awards'
+import { awardTimeline, featuredAwards } from './content/awards'
 import { articleCards } from './content/blogs'
-import { featuredProjects } from './content/projects'
+import { allProjects, featuredProjects } from './content/projects'
 import BlogPage from './components/blogs/BlogPage'
 import SiteShell from './components/SiteShell'
 import { getCurrentPathname, resolveAppRoute } from './lib/routes'
+import { applySeo, getSiteUrl } from './lib/seo'
 import AwardsPage from './pages/AwardsPage'
 import BlogsPage from './pages/BlogsPage'
 import ContactPage from './pages/ContactPage'
@@ -210,6 +211,45 @@ const heroProfileLinks: HeroProfileLink[] = [
 
 const siteTitlePrefix = 'Nayaka Ghana Subrata | Security, Systems, and Software Engineer'
 const scrambleGlyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+-?'
+const siteUrl = getSiteUrl()
+const personName = 'Nayaka Ghana Subrata'
+const personProfiles = [
+  'https://github.com/Nayekah',
+  'https://www.linkedin.com/in/nayaka-ghana-subrata/',
+  'https://x.com/Katounasai',
+  'https://codeforces.com/profile/w1ntr',
+  'https://www.cryptohack.org/user/K4tou/',
+]
+
+function createBreadcrumbJsonLd(items: Array<{ name: string; path: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: `${siteUrl}${item.path}`,
+    })),
+  }
+}
+
+function createPersonJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: personName,
+    url: `${siteUrl}/`,
+    image: `${siteUrl}/profile.jpeg`,
+    jobTitle: 'Security-focused Software Engineer',
+    email: 'mailto:nayakghana39@gmail.com',
+    sameAs: personProfiles,
+    alumniOf: {
+      '@type': 'CollegeOrUniversity',
+      name: 'Institut Teknologi Bandung',
+    },
+  }
+}
 
 function createPattern(seed: number, total = 324): PatternCell[] {
   return Array.from({ length: total }, (_, index) => {
@@ -726,7 +766,7 @@ function HeroPolaroid() {
                 href={link.href}
                 key={link.label}
                 aria-label={link.label}
-                rel={link.href.startsWith('mailto:') ? undefined : 'noreferrer'}
+                rel={link.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
                 target={link.href.startsWith('mailto:') ? undefined : '_blank'}
                 title={link.label}
               >
@@ -813,23 +853,320 @@ function App() {
   const activeRoute = useMemo(() => resolveAppRoute(pathname), [pathname])
 
   useEffect(() => {
-    const pageIdentifier =
-      activeRoute.type === 'home'
-        ? 'Home'
-        : activeRoute.type === 'blogs'
-          ? 'Blogs'
-        : activeRoute.type === 'projects'
-          ? 'Projects'
-          : activeRoute.type === 'contact'
-            ? 'Contacts'
-            : activeRoute.type === 'awards'
-              ? 'Awards'
-            : activeRoute.type === 'miscellaneous'
-              ? 'Miscellaneous'
-              : `Blog · ${activeRoute.entry.title}`
+    const normalizedPath = pathname === '/second-brain' ? '/miscellaneous' : pathname
+    const personJsonLd = createPersonJsonLd()
 
-    document.title = `${siteTitlePrefix} | ${pageIdentifier}`
-  }, [activeRoute])
+    if (activeRoute.type === 'home') {
+      applySeo({
+        title: siteTitlePrefix,
+        description:
+          'Portfolio of Nayaka Ghana Subrata, a security-focused software engineer and Informatics student building systems, cryptography projects, research notes, and full-stack products.',
+        image: '/profile.jpeg',
+        imageAlt: 'Portrait of Nayaka Ghana Subrata',
+        keywords: [
+          'Nayaka Ghana Subrata',
+          'software engineer portfolio',
+          'cybersecurity',
+          'cryptography',
+          'systems programming',
+          'full-stack developer',
+          'CTF',
+          'blockchain',
+        ],
+        pathname: '/',
+        type: 'profile',
+        jsonLd: [
+          personJsonLd,
+          {
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'nayak4.dev',
+            url: `${siteUrl}/`,
+            author: {
+              '@type': 'Person',
+              name: personName,
+            },
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'ProfilePage',
+            name: siteTitlePrefix,
+            description:
+              'Portfolio homepage for Nayaka Ghana Subrata covering software engineering, cybersecurity, cryptography, research, and selected projects.',
+            url: `${siteUrl}/`,
+            mainEntity: {
+              '@type': 'Person',
+              name: personName,
+            },
+          },
+        ],
+      })
+      return
+    }
+
+    if (activeRoute.type === 'projects') {
+      applySeo({
+        title: 'Projects',
+        description:
+          'Projects by Nayaka Ghana Subrata across secure messaging, operating systems, steganography, compilers, machine learning, and marketplace engineering.',
+        image: featuredProjects[0]?.image,
+        imageAlt: featuredProjects[0]?.imageAlt,
+        keywords: [
+          'software projects',
+          'secure messaging app',
+          'operating system project',
+          'machine learning project',
+          'compiler project',
+        ],
+        pathname: normalizedPath,
+        type: 'website',
+        jsonLd: [
+          personJsonLd,
+          createBreadcrumbJsonLd([
+            { name: 'Home', path: '/' },
+            { name: 'Projects', path: '/projects' },
+          ]),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: 'Projects',
+            url: `${siteUrl}/projects`,
+            description:
+              'Project archive covering software engineering, systems, security, and machine learning work by Nayaka Ghana Subrata.',
+            mainEntity: {
+              '@type': 'ItemList',
+              itemListElement: allProjects.map((project, index) => ({
+                '@type': 'ListItem',
+                position: index + 1,
+                item: {
+                  '@type': 'CreativeWork',
+                  name: project.title,
+                  description: project.description,
+                  url: project.href,
+                },
+              })),
+            },
+          },
+        ],
+      })
+      return
+    }
+
+    if (activeRoute.type === 'blogs') {
+      applySeo({
+        title: 'Blogs',
+        description:
+          'Technical blog archive by Nayaka Ghana Subrata with notes on cryptography, post-quantum security, Linux kernel exploitation, and systems research.',
+        image: articleCards[0]?.coverImage ?? '/blogs/ntt.png',
+        imageAlt: articleCards[0]?.coverAlt ?? 'Technical blog cover image',
+        keywords: [
+          'technical blog',
+          'cryptography write-up',
+          'kernel exploitation',
+          'post-quantum cryptography',
+          'systems research',
+        ],
+        pathname: normalizedPath,
+        type: 'website',
+        jsonLd: [
+          personJsonLd,
+          createBreadcrumbJsonLd([
+            { name: 'Home', path: '/' },
+            { name: 'Blogs', path: '/blogs' },
+          ]),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: 'Blogs',
+            url: `${siteUrl}/blogs`,
+            description:
+              'Technical notes and research write-ups by Nayaka Ghana Subrata on cryptography, PWN, and systems.',
+            mainEntity: {
+              '@type': 'ItemList',
+              itemListElement: articleCards
+                .filter((article) => article.linkHref)
+                .map((article, index) => ({
+                  '@type': 'ListItem',
+                  position: index + 1,
+                  item: {
+                    '@type': 'BlogPosting',
+                    headline: article.title,
+                    description: article.body,
+                    url: `${siteUrl}${article.linkHref}`,
+                  },
+                })),
+            },
+          },
+        ],
+      })
+      return
+    }
+
+    if (activeRoute.type === 'contact') {
+      applySeo({
+        title: 'Contact',
+        description:
+          'Contact Nayaka Ghana Subrata for software engineering, security-oriented builds, research collaboration, portfolio work, and technical writing.',
+        image: '/profile.jpeg',
+        imageAlt: 'Portrait of Nayaka Ghana Subrata',
+        keywords: [
+          'contact Nayaka Ghana Subrata',
+          'hire software engineer',
+          'security engineer contact',
+          'research collaboration',
+        ],
+        pathname: normalizedPath,
+        type: 'website',
+        jsonLd: [
+          personJsonLd,
+          createBreadcrumbJsonLd([
+            { name: 'Home', path: '/' },
+            { name: 'Contact', path: '/contacts' },
+          ]),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'ContactPage',
+            name: 'Contact Nayaka Ghana Subrata',
+            url: `${siteUrl}/contacts`,
+            description:
+              'Contact page for software engineering, security, research, and writing collaborations.',
+            mainEntity: {
+              '@type': 'Person',
+              name: personName,
+              email: 'mailto:nayakghana39@gmail.com',
+              sameAs: personProfiles,
+            },
+          },
+        ],
+      })
+      return
+    }
+
+    if (activeRoute.type === 'awards') {
+      applySeo({
+        title: 'Awards',
+        description:
+          'Awards and competition results for Nayaka Ghana Subrata, including ICPC, CTF placements, and cybersecurity competition milestones.',
+        image: awardTimeline[0]?.image,
+        imageAlt: awardTimeline[0]?.imageAlt,
+        keywords: [
+          'ICPC',
+          'capture the flag awards',
+          'cybersecurity competitions',
+          'programming competition awards',
+        ],
+        pathname: normalizedPath,
+        type: 'website',
+        jsonLd: [
+          personJsonLd,
+          createBreadcrumbJsonLd([
+            { name: 'Home', path: '/' },
+            { name: 'Awards', path: '/awards' },
+          ]),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: 'Awards',
+            url: `${siteUrl}/awards`,
+            description:
+              'Award archive covering programming and cybersecurity competition achievements by Nayaka Ghana Subrata.',
+            mainEntity: {
+              '@type': 'ItemList',
+              itemListElement: awardTimeline.map((award, index) => ({
+                '@type': 'ListItem',
+                position: index + 1,
+                item: {
+                  '@type': 'CreativeWork',
+                  name: award.title,
+                  description: award.summary,
+                },
+              })),
+            },
+          },
+        ],
+      })
+      return
+    }
+
+    if (activeRoute.type === 'miscellaneous') {
+      applySeo({
+        title: 'Miscellaneous',
+        description:
+          'A personal miscellany from Nayaka Ghana Subrata, including hobbies, favorite media, listening activity, and notes that sit outside the main project archive.',
+        image: '/profile.jpeg',
+        imageAlt: 'Portrait of Nayaka Ghana Subrata',
+        keywords: [
+          'miscellaneous notes',
+          'personal interests',
+          'Spotify activity',
+          'books and movies',
+        ],
+        pathname: normalizedPath,
+        type: 'website',
+        jsonLd: [
+          personJsonLd,
+          createBreadcrumbJsonLd([
+            { name: 'Home', path: '/' },
+            { name: 'Miscellaneous', path: '/miscellaneous' },
+          ]),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            name: 'Miscellaneous',
+            url: `${siteUrl}/miscellaneous`,
+            description:
+              'A personal archive of hobbies, references, media picks, and listening activity by Nayaka Ghana Subrata.',
+          },
+        ],
+      })
+      return
+    }
+
+    const articleCard = articleCards.find(
+      (article) => article.linkHref === `/blogs/${activeRoute.entry.slug}`
+    )
+    const articleDescription =
+      activeRoute.entry.summary || activeRoute.entry.cardBody || articleCard?.body || activeRoute.entry.title
+    const articleImage = articleCard?.coverImage ?? '/blogs/ntt.png'
+    const articlePublishedTime = articleCard?.publishedAt
+
+    applySeo({
+      title: activeRoute.entry.title,
+      description: articleDescription,
+      image: articleImage,
+      imageAlt: articleCard?.coverAlt ?? activeRoute.entry.title,
+      keywords: activeRoute.entry.tags,
+      pathname: normalizedPath,
+      publishedTime: articlePublishedTime,
+      type: 'article',
+      jsonLd: [
+        personJsonLd,
+        createBreadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: 'Blogs', path: '/blogs' },
+          { name: activeRoute.entry.title, path: `/blogs/${activeRoute.entry.slug}` },
+        ]),
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: activeRoute.entry.title,
+          description: articleDescription,
+          image: `${siteUrl}${articleImage}`,
+          author: {
+            '@type': 'Person',
+            name: personName,
+          },
+          publisher: {
+            '@type': 'Person',
+            name: personName,
+          },
+          datePublished: articlePublishedTime,
+          mainEntityOfPage: `${siteUrl}/blogs/${activeRoute.entry.slug}`,
+          keywords: activeRoute.entry.tags.join(', '),
+        },
+      ],
+    })
+  }, [activeRoute, pathname])
 
   const previousAward = () => {
     setActiveAward((current) => (current === 0 ? featuredAwards.length - 1 : current - 1))
@@ -919,7 +1256,7 @@ function App() {
                   className="button-outline button-with-icon"
                   href="https://www.linkedin.com/in/nayaka-ghana-subrata/"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
                   <FiLinkedin aria-hidden="true" />
                   <span>LinkedIn</span>
@@ -1133,7 +1470,7 @@ function App() {
                       className={`project-visual tone-${project.tone}`}
                       href={project.href}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                     >
                       <img
                         className="project-image"
@@ -1157,7 +1494,7 @@ function App() {
                       className="button-outline button-with-icon project-link"
                       href={project.href}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                     >
                       <FiGithub aria-hidden="true" />
                       <span>View on GitHub</span>

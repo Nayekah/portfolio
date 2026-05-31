@@ -59,7 +59,7 @@ function Navbar({ isHomePage = true, navItems }: NavbarProps) {
         onClick={closeMenu}
         aria-label="Go to home"
       >
-        <img className="brand-gif" src="/main-navbar.gif" alt="" aria-hidden="true" />
+        <img className="brand-gif" src="/nav.png" alt="" aria-hidden="true" />
       </a>
 
       <button

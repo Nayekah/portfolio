@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nayak4.dev/sitemap.xml
+Host: nayak4.dev

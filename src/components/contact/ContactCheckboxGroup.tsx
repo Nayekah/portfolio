@@ -25,11 +25,11 @@ function ContactCheckboxGroup({
   return (
     <fieldset
       aria-describedby={error ? `${name}-error` : undefined}
-      aria-required={required}
       className={`contact-checkbox-group${error ? ' is-invalid' : ''}`}
     >
       <legend className="contact-field-label">
         {legend}
+        {required ? <span className="sr-only"> (required)</span> : null}
         {required ? (
           <span className="contact-required-mark" aria-hidden="true">
             {' '}
