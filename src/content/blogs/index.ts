@@ -1,11 +1,26 @@
 import type { ArticleCard, BlogEntry } from '../../types/content'
 import { kfuncyBlog } from './kfuncy'
 import { latticoraBlog } from './latticora'
+import { mevbotBlog, mevbotCoverImage } from './mevbot'
 import { tetBlog } from './tet'
 
-export const blogEntries: BlogEntry[] = [latticoraBlog, kfuncyBlog, tetBlog]
+export const blogEntries: BlogEntry[] = [mevbotBlog, latticoraBlog, kfuncyBlog, tetBlog]
 
 export const articleCards: ArticleCard[] = [
+  {
+    tags: mevbotBlog.tags,
+    linkHref: `/blogs/${mevbotBlog.slug}`,
+    meta: mevbotBlog.meta,
+    date: mevbotBlog.date,
+    publishedAt: '2026-10-01',
+    title: mevbotBlog.cardTitle,
+    body: mevbotBlog.cardBody,
+    tone: 'dark',
+    coverAlt: 'MEV Bot challenge screenshot.',
+    coverImage: mevbotCoverImage,
+    hideCoverContent: true,
+    linkVariant: 'reference',
+  },
   {
     tags: latticoraBlog.tags,
     linkHref: `/blogs/${latticoraBlog.slug}`,

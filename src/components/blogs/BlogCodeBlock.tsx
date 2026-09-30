@@ -54,7 +54,7 @@ function wrapCodeLine(line: string, maxColumns: number) {
   }
 
   const baseIndent = line.match(/^\s*/)?.[0] ?? ''
-  const continuationIndent = `${baseIndent}    `
+  const continuationIndent = baseIndent
   const wrappedLines: string[] = []
   let remaining = line.slice(baseIndent.length)
   let currentLimit = Math.max(12, maxColumns - baseIndent.length)

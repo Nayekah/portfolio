@@ -1,6 +1,7 @@
 import katex from 'katex'
 import type { ReactNode } from 'react'
-import { FiGithub } from 'react-icons/fi'
+import { BsTwitterX } from 'react-icons/bs'
+import { FiGithub, FiGlobe } from 'react-icons/fi'
 import type { BlogBlock, TocItem } from '../types/content'
 
 function slugify(value: string) {
@@ -20,7 +21,7 @@ function stripMarkdown(value: string) {
 export function renderInlineMarkdown(text: string) {
   const nodes: ReactNode[] = []
   const pattern =
-    /(\{\{github-badge:[^|}]+\|[^}]+\}\}|\[!\[[^\]]*\]\([^)]+\)\]\([^)]+\)|!\[[^\]]*\]\([^)]+\)|\$\$[^$]+\$\$|\$[^$\n]+\$|\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g
+    /(\{\{social-badge:[^|}]+\|[^|}]+\|[^}]+\}\}|\{\{github-badge:[^|}]+\|[^}]+\}\}|\[!\[[^\]]*\]\([^)]+\)\]\([^)]+\)|!\[[^\]]*\]\([^)]+\)|\$\$[^$]+\$\$|\$[^$\n]+\$|\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g
   let lastIndex = 0
 
   for (const match of text.matchAll(pattern)) {
@@ -31,7 +32,28 @@ export function renderInlineMarkdown(text: string) {
       nodes.push(text.slice(lastIndex, index))
     }
 
-    if (token.startsWith('{{github-badge:')) {
+    if (token.startsWith('{{social-badge:')) {
+      const badgeMatch = token.match(/^\{\{social-badge:([^|}]+)\|([^|}]+)\|([^}]+)\}\}$/)
+      if (badgeMatch) {
+        const [_, platform, label, href] = badgeMatch
+        const icon = platform === 'x' ? <BsTwitterX /> : <FiGlobe />
+
+        nodes.push(
+          <a
+            className="blog-inline-badge"
+            href={href}
+            key={`${index}-social-badge`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="blog-inline-badge-icon" aria-hidden="true">
+              {icon}
+            </span>
+            <span className="blog-inline-badge-label">{label}</span>
+          </a>
+        )
+      }
+    } else if (token.startsWith('{{github-badge:')) {
       const badgeMatch = token.match(/^\{\{github-badge:([^|}]+)\|([^}]+)\}\}$/)
       if (badgeMatch) {
         nodes.push(

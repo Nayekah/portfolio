@@ -521,6 +521,12 @@
   font-size: clamp(1.6rem, 2.4vw, 2.2rem);
 }
 
+.blog-subsection-title:not(:first-child) {
+  margin-top: 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
 .blog-paragraph,
 .blog-equation,
 .blog-code-block,
@@ -565,6 +571,19 @@
   background: var(--surface-inline-code);
   border: 1px solid var(--border-soft);
   font-size: 0.95em;
+}
+
+.blog-content a:not(.blog-inline-badge) {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+}
+
+.blog-content a:not(.blog-inline-badge):hover,
+.blog-content a:not(.blog-inline-badge):focus-visible {
+  color: var(--muted);
 }
 
 .blog-inline-equation {
