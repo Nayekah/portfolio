@@ -9,6 +9,7 @@ import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javasc
 import json from 'react-syntax-highlighter/dist/esm/languages/prism/json'
 import markdown from 'react-syntax-highlighter/dist/esm/languages/prism/markdown'
 import python from 'react-syntax-highlighter/dist/esm/languages/prism/python'
+import solidity from 'react-syntax-highlighter/dist/esm/languages/prism/solidity'
 import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript'
 import { useTheme } from '../theme'
 
@@ -24,6 +25,8 @@ SyntaxHighlighter.registerLanguage('markdown', markdown)
 SyntaxHighlighter.registerLanguage('md', markdown)
 SyntaxHighlighter.registerLanguage('python', python)
 SyntaxHighlighter.registerLanguage('py', python)
+SyntaxHighlighter.registerLanguage('solidity', solidity)
+SyntaxHighlighter.registerLanguage('sol', solidity)
 SyntaxHighlighter.registerLanguage('typescript', typescript)
 SyntaxHighlighter.registerLanguage('ts', typescript)
 
