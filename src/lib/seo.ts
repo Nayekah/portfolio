@@ -1,6 +1,6 @@
 const SITE_URL = 'https://nayak4.dev'
 const SITE_NAME = 'nayak4.dev'
-const DEFAULT_IMAGE = `${SITE_URL}/profile.jpeg`
+const DEFAULT_IMAGE = `${SITE_URL}/logo.jpg`
 const DEFAULT_ROBOTS =
   'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
 

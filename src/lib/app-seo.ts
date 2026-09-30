@@ -48,8 +48,8 @@ function useAppSeo(activeRoute: AppRoute, pathname: string) {
         title: siteTitlePrefix,
         description:
           'Portfolio of Nayaka Ghana Subrata, a security-focused software engineer and Informatics student building systems, cryptography projects, research notes, and full-stack products.',
-        image: '/profile.jpeg',
-        imageAlt: 'Portrait of Nayaka Ghana Subrata',
+        image: '/logo.jpg',
+        imageAlt: 'Illustration of Reze',
         keywords: [
           'Nayaka Ghana Subrata',
           'software engineer portfolio',
