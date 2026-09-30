@@ -564,10 +564,10 @@ That’s all. Ok… so… why I put this explanation in the “Main Vuln”, whe
 
 - The `func()` are payable, so we can send and receive Ether
 - Checks last byte of previous block hash (it must be `< 100`)
-- Checks last byte of the sender address (it must be `< 50`)
+- Checks last byte of the sender address (it must be `50`)
 - Checks the `wei` value (it must be `1337`)
 
-Since it has no other checks (like checking with `rescue()` etc), I think that we can trick these 3 checks so we can use these functions arbitrarily. But, the main problem is how to deterministically make the previous block and the sender so it will pass the checks? Welp, we can just pre-compute the private key that has the last byte of `<= 50`, and since the server gives us the parent hash, we just need to extract and verify until all of its last bytes are `< 100`. And for the value, we just need to send `1337` for the values to bypass all checkers:
+Since it has no other checks (like checking with `rescue()` etc), I think that we can trick these 3 checks so we can use these functions arbitrarily. But, the main problem is how to deterministically make the previous block and the sender so it will pass the checks? Welp, we can just pre-compute the private key that has the last byte of `50`, and since the server gives us the parent hash, we just need to extract and verify until all of its last bytes are `< 100`. And for the value, we just need to send `1337` for the values to bypass all checkers:
 
 <figure><img src="assets/image13.png" alt=""><figcaption></figcaption></figure>
 
@@ -575,7 +575,7 @@ And yeah, that’s it, we successfully get the main vuln and the exploit chain :
 
 ### Exploit
 
-And…, for the last part (the exploit), we just need to fill the data with `0xdaffa137` + `00` * `64` (since we need to fill `varg0` and `varg1` with each of them being 32 bytes), then just brute force the private key that is less or equal than 50 (`<= 0x32`), and for the value is `1337` (for passing the `msg.value` check). And also we need to make sure that our last byte of the parsed hex is still `< 100`. And lastly, since it is a non-deterministic approach, we just need to connect-reconnect until we get our wanted value. Below is the complete script I created to solve the challenge:
+And…, for the last part (the exploit), we just need to fill the data with `0xdaffa137` + `00` * `64` (since we need to fill `varg0` and `varg1` with each of them being 32 bytes), then just brute force the private key that has the last byte of 50 (`0x32`), and for the value is `1337` (for passing the `msg.value` check). And also we need to make sure that our last byte of the parsed hex is still `< 100`. And lastly, since it is a non-deterministic approach, we just need to connect-reconnect until we get our wanted value. Below is the complete script I created to solve the challenge:
 
 ```python
 from pwn import *
