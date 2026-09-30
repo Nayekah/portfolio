@@ -550,7 +550,14 @@ And finally for the very inner loop:
 we can simplify it like this:
 
 ```solidity
-_compound += varg0 ^ varg1; _claim++; (bool v3,) = msg.sender.call().value(this.balance).gas(msg.gas); require(v3, "sweep"); emit Sweep(msg.sender, address(this).balance); return 0;
+_compound += varg0 ^ varg1;
+_claim++;
+
+(bool v3,) = msg.sender.call().value(this.balance).gas(msg.gas);
+require(v3, "sweep");
+
+emit Sweep(msg.sender, address(this).balance);
+return 0;
 ```
 
 That’s all. Ok… so… why I put this explanation in the “Main Vuln”, where are the vulnerabilities? Welp here are some recap and my notes ofc of this func:
