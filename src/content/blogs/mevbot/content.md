@@ -526,7 +526,7 @@ Firstly are `execute()`, this func is a simple one (among the other func ofc), w
 
 Well for the `_SafeAdd()` and `_SafeSub()`, it is just a basic add and sub operation (`a+b` and `a-b`), but there are some checks to prevent arithmetic overflow or underflow (just like the comments said).
 
-But to be honest, I’m heavily exhausted by reading the whole chall (cuz there are so many functions that have to be read off). So I try to skim the implementations again, and see an interesting function (since the name reminds me of a CTF legend {{social-badge:globe|@daffainfo|https://daffainfo.com/}}). Also, this function is only called on the `__function_selector__()` so we can choose to run only this function.
+But to be honest, I’m heavily exhausted by reading the whole chall (cuz there are so many functions that have to be read off). So I try to skim the implementations again, and see an interesting function (since the name reminds me of a CTF legend {{social-badge:globe|@daffainfo|https://daffainfo.com/}}). Looking at the dispatcher, this function has its own selector, which means we can invoke it directly through calldata without going through the other functions. Most of the other functions appear to be red herrings or independent decoy functionality, so we do not need to fully understand all of them for the main exploit chain.
 <figure><img src="assets/image8.png" alt=""><figcaption></figcaption></figure>
 
 So, I’ll be explaining the functions that also lead me to the main exploit chain (yayy).
