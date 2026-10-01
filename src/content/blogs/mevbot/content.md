@@ -560,7 +560,7 @@ emit Sweep(msg.sender, address(this).balance);
 return 0;
 ```
 
-That’s all. Ok… so… why I put this explanation in the “Main Vuln”, where are the vulnerabilities? Welp here are some recap and my notes ofc of this func:
+With this logic, once all of the conditions are satisfied, we can simply drain the entire ETH balance of the contract to our own address, and... that's it! Ok… so…, why I put this explanation in the “Main Vuln”, where are the vulnerabilities? Welp here are some recap and my notes ofc of this func:
 
 - The `func()` are payable, so we can send and receive Ether
 - Checks last byte of previous block hash (it must be `< 100`)
